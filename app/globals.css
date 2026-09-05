@@ -1,0 +1,260 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   FRO Solar — Design System Tokens
+   Source of truth: .agents/skills/fro-solar-website-orchestrator/references/design-system.md
+───────────────────────────────────────────── */
+@theme {
+  /* Brand Colors */
+  --color-fro-teal:        #0E4B48;
+  --color-fro-teal-light:  #155954;
+  --color-fro-teal-dark:   #092e2c;
+  --color-fro-green:       #8DC63F;
+  --color-fro-green-dark:  #6fa32e;
+  --color-fro-orange:      #F7941D;
+  --color-fro-orange-dark: #d97a10;
+  --color-fro-white:       #FFFFFF;
+  --color-fro-off-white:   #F4F8F4;
+  --color-fro-surface:     #F0F4F0;
+  --color-fro-ink:         #1A2E1A;
+  --color-fro-ink-muted:   #4A5E4A;
+
+  /* Typography */
+  --font-display: var(--font-poppins), system-ui, sans-serif;
+  --font-body:    var(--font-inter), system-ui, sans-serif;
+
+  /* Shape */
+  --radius-card:   12px;
+  --radius-button: 9999px;
+  --radius-badge:  8px;
+}
+
+/* ─────────────────────────────────────────────
+   Base Reset
+───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-fro-ink);
+  background-color: var(--color-fro-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────────
+   Typography Scale
+───────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-fro-teal);
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(2rem, 3.5vw, 3rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+h4 { font-size: 1.125rem; }
+
+p {
+  font-family: var(--font-body);
+  max-width: 65ch;
+  line-height: 1.7;
+  color: var(--color-fro-ink-muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─────────────────────────────────────────────
+   FRO Brand Dot-Grid Texture
+───────────────────────────────────────────── */
+.fro-dot-grid {
+  background-image: radial-gradient(circle, rgba(141,198,63,0.18) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ─────────────────────────────────────────────
+   Blob Decorative Shapes
+───────────────────────────────────────────── */
+.fro-blob {
+  position: absolute;
+  border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  background: var(--color-fro-green);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   Section Layout Utilities
+───────────────────────────────────────────── */
+.fro-section {
+  padding: 6rem 1.5rem;
+}
+
+.fro-container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+/* ─────────────────────────────────────────────
+   Buttons
+───────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-fro-green);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-button);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: var(--color-fro-green-dark);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--color-fro-white);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.875rem 2rem;
+  border-radius: var(--radius-button);
+  border: 2px solid rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-fro-white);
+  background: rgba(255,255,255,0.08);
+}
+
+.btn-ghost:active {
+  transform: scale(0.98);
+}
+
+/* ─────────────────────────────────────────────
+   Cards
+───────────────────────────────────────────── */
+.fro-card {
+  background: var(--color-fro-white);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fro-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(14,75,72,0.12);
+}
+
+/* ─────────────────────────────────────────────
+   Badge / Pill
+───────────────────────────────────────────── */
+.fro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--color-fro-green);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+}
+
+/* ─────────────────────────────────────────────
+   Cert Cards
+───────────────────────────────────────────── */
+.fro-cert-card {
+  border: 2px solid var(--color-fro-orange);
+  border-radius: var(--radius-card);
+  background: var(--color-fro-white);
+  padding: 1.5rem;
+  position: relative;
+}
+
+.fro-cert-dot {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-fro-orange);
+}
+
+/* ─────────────────────────────────────────────
+   Nav
+───────────────────────────────────────────── */
+.fro-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  background: rgba(14,75,72,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(141,198,63,0.2);
+  transition: background 0.3s ease;
+}
+
+/* ─────────────────────────────────────────────
+   Scrollbar
+───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-fro-teal-dark); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-fro-green);
+  border-radius: 3px;
+}
+
+/* ─────────────────────────────────────────────
+   Reduced Motion
+───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
