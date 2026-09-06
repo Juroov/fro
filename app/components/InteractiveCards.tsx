@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 
 type IconName = "phone" | "email" | "map";
 
@@ -10,23 +11,16 @@ interface Project {
   iconName: string;
 }
 
-export function ProjectCard({ project }: { project: Project }) {
-  const [hovered, setHovered] = useState(false);
+export function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const reduce = useReducedMotion();
 
   return (
-    <article
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: hovered
-          ? "rgba(255,255,255,0.10)"
-          : "rgba(255,255,255,0.06)",
-        border: "1px solid rgba(141,198,63,0.2)",
-        borderRadius: 12,
-        padding: "1.5rem",
-        transition: "background 0.2s ease",
-        cursor: "default",
-      }}
+    <motion.article
+      className="fro-project-card"
+      initial={reduce ? false : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: (index % 4) * 0.07, ease: [0.16, 1, 0.3, 1] }}
     >
       <div
         style={{
@@ -40,10 +34,11 @@ export function ProjectCard({ project }: { project: Project }) {
         <h3
           style={{
             color: "#fff",
-            fontSize: "0.975rem",
+            fontSize: "0.9375rem",
             fontWeight: 600,
             fontFamily: "var(--font-display)",
             lineHeight: 1.3,
+            letterSpacing: "-0.01em",
           }}
         >
           {project.name}
@@ -55,14 +50,14 @@ export function ProjectCard({ project }: { project: Project }) {
       <p
         style={{
           fontSize: "0.8rem",
-          color: "rgba(255,255,255,0.45)",
+          color: "rgba(255,255,255,0.42)",
           maxWidth: "100%",
           fontFamily: "var(--font-body)",
         }}
       >
         {project.type}
       </p>
-    </article>
+    </motion.article>
   );
 }
 
@@ -108,8 +103,8 @@ export function ContactLink({ href, iconName, text }: ContactLinkProps) {
         alignItems: "center",
         gap: "0.5rem",
         fontFamily: "var(--font-body)",
-        fontSize: "0.9rem",
-        color: hovered ? "#fff" : "rgba(255,255,255,0.72)",
+        fontSize: "0.875rem",
+        color: hovered ? "#fff" : "rgba(255,255,255,0.65)",
         textDecoration: "none",
         transition: "color 0.2s",
       }}
@@ -119,3 +114,25 @@ export function ContactLink({ href, iconName, text }: ContactLinkProps) {
     </a>
   );
 }
+
+interface RevealProps {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}
+
+export function Reveal({ children, delay = 0, className }: RevealProps) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial={reduce ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
