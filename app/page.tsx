@@ -1,5 +1,6 @@
-﻿import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import { ProjectCard, ContactLink, Reveal } from "./components/InteractiveCards";
+import HowItWorksTrigger from "./components/SolarProcessModal";
 
 const stats = [
   { number: "28", unit: "Yrs", label: "Industry experience" },
@@ -79,9 +80,10 @@ export default function HomePage() {
             <p style={{ color: "rgba(255,255,255,0.72)", fontSize: "1.125rem", maxWidth: "50ch", marginBottom: "2.25rem", lineHeight: 1.7, fontFamily: "var(--font-body)" }}>
               Solar installation across Davao del Sur by engineers who have commissioned power plants up to 175 MW across seven countries.
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.875rem" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.875rem", alignItems: "center" }}>
               <a href="#contact" className="btn-primary" id="hero-cta">Request a Quote</a>
               <a href="#projects" className="btn-ghost" id="hero-view-work-cta">See Our Work</a>
+              <HowItWorksTrigger id="hero-how-it-works-cta" />
             </div>
           </div>
         </div>
@@ -132,6 +134,34 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
+
+          {/* 3D Walkthrough Feature Banner */}
+          <Reveal delay={0.25}>
+            <div
+              style={{
+                marginTop: "3rem",
+                padding: "2rem 2.5rem",
+                background: "var(--color-fro-teal)",
+                borderRadius: "var(--radius-card)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: "1.5rem",
+                boxShadow: "0 16px 40px rgba(14,75,72,0.12)",
+              }}
+            >
+              <div>
+                <h3 style={{ color: "#ffffff", marginBottom: "0.35rem", fontSize: "1.25rem" }}>
+                  Curious how solar panels are installed on your roof?
+                </h3>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.9375rem", margin: 0, maxWidth: "60ch" }}>
+                  Explore our complete 8-phase engineering process &mdash; from 3D roof scanning and heavy-duty racking to live grid energization.
+                </p>
+              </div>
+              <HowItWorksTrigger className="btn-primary" id="services-how-it-works-cta" />
+            </div>
+          </Reveal>
         </div>
       </section>
 

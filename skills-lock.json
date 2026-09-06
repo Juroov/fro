@@ -1,6 +1,30 @@
 {
   "version": 1,
   "skills": {
+    "3d-animation-short-generator": {
+      "source": "minimax-ai/minimax-h3",
+      "sourceType": "github",
+      "skillPath": "skills/3d-animation-short-generator/SKILL.md",
+      "computedHash": "c4e7e37c05ec9069302405a0ea24518eeb69bbd293d8c019abc3066240f862ea"
+    },
+    "3d-model-generation": {
+      "source": "eachlabs/skills",
+      "sourceType": "github",
+      "skillPath": "skills/3d-model-generation/SKILL.md",
+      "computedHash": "f9fff75f4f58f6edc541377c98dda83faf1fe42ed82c1916291d1a3754052bf9"
+    },
+    "3d-modeling": {
+      "source": "omer-metin/skills-for-antigravity",
+      "sourceType": "github",
+      "skillPath": "skills/3d-modeling/SKILL.md",
+      "computedHash": "dd0beea41a5f5711c6a8b209bb2218340ab7afabe26147eb1560e4d26d65f7c5"
+    },
+    "3d-web-experience": {
+      "source": "sickn33/agentic-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/3d-web-experience/SKILL.md",
+      "computedHash": "ece6cc650690490b73b5fbe5870a0f9a83db1143720b0a7567d7c34a33a88787"
+    },
     "design-taste-frontend": {
       "source": "leonxlnx/taste-skill",
       "sourceType": "github",
