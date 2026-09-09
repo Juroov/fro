@@ -66,18 +66,25 @@ export default function HomePage() {
       <Navbar />
 
       {/* HERO */}
-      <section id="home" aria-label="FRO Solar hero" style={{ position: "relative", minHeight: "100dvh", display: "flex", alignItems: "center", background: "linear-gradient(to bottom, rgba(7,31,30,0.25) 0%, rgba(7,31,30,0.52) 50%, rgba(7,31,30,0.92) 100%), url('/hero-solar.jpg') center/cover no-repeat" }}>
-        <div className="fro-container px-6" style={{ paddingTop: "6rem", paddingBottom: "5rem" }}>
+      <section
+        id="home"
+        aria-label="FRO Solar hero"
+        style={{
+          position: "relative",
+          minHeight: "100dvh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          background: "linear-gradient(to bottom, rgba(7,31,30,0.3) 0%, rgba(7,31,30,0.55) 50%, rgba(7,31,30,0.85) 85%, rgba(7,31,30,0.98) 100%), url('/hero-solar.jpg') center/cover no-repeat",
+        }}
+      >
+        <div className="fro-container px-6" style={{ paddingTop: "7.5rem", paddingBottom: "3rem", flex: 1, display: "flex", alignItems: "center" }}>
           <div style={{ maxWidth: 640 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", marginBottom: "2rem", background: "rgba(141,198,63,0.12)", border: "1px solid rgba(141,198,63,0.28)", borderRadius: 9999, padding: "0.375rem 1rem", fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "0.75rem", color: "var(--color-fro-green)", letterSpacing: "0.04em" }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--color-fro-green)", display: "inline-block" }} />
-              Digos City, Davao del Sur
-            </div>
             <h1 style={{ color: "#fff", fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(2.75rem, 5.5vw, 4.5rem)", lineHeight: 1.04, letterSpacing: "-0.035em", marginBottom: "1.375rem" }}>
               Power Your Home<br />
               <span style={{ color: "var(--color-fro-green)" }}>with the Sun.</span>
             </h1>
-            <p style={{ color: "rgba(255,255,255,0.72)", fontSize: "1.125rem", maxWidth: "50ch", marginBottom: "2.25rem", lineHeight: 1.7, fontFamily: "var(--font-body)" }}>
+            <p style={{ color: "rgba(255,255,255,0.78)", fontSize: "1.125rem", maxWidth: "50ch", marginBottom: "2.25rem", lineHeight: 1.7, fontFamily: "var(--font-body)" }}>
               Solar installation across Davao del Sur by engineers who have commissioned power plants up to 175 MW across seven countries.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.875rem", alignItems: "center" }}>
@@ -87,25 +94,51 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div aria-hidden="true" style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 80, background: "linear-gradient(to top, #fff 0%, transparent 100%)" }} />
-      </section>
 
-      {/* STATS */}
-      <section aria-label="Company credentials" className="fro-dot-grid" style={{ background: "var(--color-fro-teal)", padding: "4rem 1.5rem" }}>
-        <div className="fro-container">
-          <dl style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))" }}>
-            {stats.map((s, i) => (
-              <div key={s.label} style={{ padding: "1.5rem 2rem", borderLeft: i > 0 ? "1px solid rgba(141,198,63,0.18)" : "none" }}>
-                <dt>
-                  <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(2rem, 4vw, 3rem)", color: "#fff", lineHeight: 1, display: "block", letterSpacing: "-0.04em" }}>
-                    {s.number}
-                    {s.unit && <span style={{ color: "var(--color-fro-green)", fontSize: "0.52em", letterSpacing: 0 }}>{" "}{s.unit}</span>}
-                  </span>
-                </dt>
-                <dd style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", color: "rgba(255,255,255,0.5)", marginTop: "0.375rem", letterSpacing: "0.01em" }}>{s.label}</dd>
-              </div>
-            ))}
-          </dl>
+        {/* COMBINED TRANSITIONAL STATS BAR */}
+        <div
+          aria-label="Company credentials"
+          style={{
+            position: "relative",
+            zIndex: 10,
+            width: "100%",
+            borderTop: "1px solid rgba(141,198,63,0.18)",
+            background: "linear-gradient(180deg, rgba(14,75,72,0.72) 0%, rgba(7,31,30,0.92) 100%)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            padding: "2rem 1.5rem 2.5rem",
+          }}
+        >
+          {/* Subtle green ambient accent glow */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "15%",
+              right: "15%",
+              height: 1,
+              background: "linear-gradient(90deg, transparent 0%, var(--color-fro-green) 50%, transparent 100%)",
+              opacity: 0.6,
+            }}
+          />
+          <div className="fro-container">
+            <dl className="hero-stats-grid">
+              {stats.map((s) => (
+                <div key={s.label} className="hero-stat-cell">
+                  <dt>
+                    <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(2rem, 3.8vw, 3.25rem)", color: "#fff", lineHeight: 1, display: "block", letterSpacing: "-0.04em" }}>
+                      {s.number}
+                      {s.unit && <span style={{ color: "var(--color-fro-green)", fontSize: "0.52em", letterSpacing: 0 }}>{" "}{s.unit}</span>}
+                    </span>
+                  </dt>
+                  <dd style={{ fontFamily: "var(--font-body)", fontSize: "0.8125rem", color: "rgba(255,255,255,0.65)", marginTop: "0.375rem", letterSpacing: "0.01em", lineHeight: 1.4 }}>
+                    {s.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </section>
 
@@ -180,8 +213,7 @@ export default function HomePage() {
                 <p style={{ marginBottom: "2rem" }}>Today, FRO Solar brings that same engineering discipline to Davao del Sur: reliable solar energy for homes, businesses, farms, schools, and resorts.</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.625rem" }}>
                   {["DTI & TESDA NC II certified", "City of Digos Business Permit 2026", "IOSH Managing Safely"].map((item) => (
-                    <span key={item} style={{ display: "inline-flex", alignItems: "center", gap: "0.375rem", background: "var(--color-fro-off-white)", border: "1px solid var(--color-fro-border)", borderRadius: 9999, padding: "0.375rem 0.875rem", fontFamily: "var(--font-body)", fontSize: "0.8rem", color: "var(--color-fro-ink-muted)" }}>
-                      <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--color-fro-green)", flexShrink: 0 }} />
+                    <span key={item} style={{ display: "inline-flex", alignItems: "center", background: "var(--color-fro-off-white)", border: "1px solid var(--color-fro-border)", borderRadius: 9999, padding: "0.375rem 0.875rem", fontFamily: "var(--font-body)", fontSize: "0.8rem", color: "var(--color-fro-ink-muted)" }}>
                       {item}
                     </span>
                   ))}
@@ -252,7 +284,7 @@ export default function HomePage() {
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "2rem" }}>
             <ContactLink href="tel:+6309063665473" iconName="phone" text="082-272-0011 / 0906-366-5473" />
             <ContactLink href="mailto:frosolar.energysolutions@gmail.com" iconName="email" text="frosolar.energysolutions@gmail.com" />
-            <ContactLink href="#" iconName="map" text="Sta. Ana Road, Digos City, Davao del Sur" />
+            
           </div>
         </div>
         <footer style={{ background: "var(--color-fro-teal-dark)", padding: "1.25rem 1.5rem", textAlign: "center", position: "relative", zIndex: 1, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
