@@ -45,9 +45,9 @@ const STEPS: StepData[] = [
       { label: "Solar Irradiance", value: "5.4 kWh/m²/day" },
     ],
     annotations: [
-      { label: "ROOF AZIMUTH", detail: "180° South (Max Yield)", pos: [0, 4.4, 1.2] },
-      { label: "USABLE ROOF AREA", detail: "48.5 m² (Zero Shading)", pos: [2.5, 4.2, -0.5] },
-      { label: "OPTICAL LASER SCAN", detail: "Active LIDAR Sweep", pos: [-2.5, 4.6, 0.8] },
+      { label: "OPTICAL LASER SCAN", detail: "Active LIDAR Sweep", pos: [-2.2, 5.3, 0.2] },
+      { label: "ROOF AZIMUTH", detail: "180° South (Max Yield)", pos: [0.3, 3.9, 1.6] },
+      { label: "USABLE ROOF AREA", detail: "48.5 m² (Zero Shading)", pos: [3.2, 4.9, -0.4] },
     ],
   },
   {
@@ -65,9 +65,9 @@ const STEPS: StepData[] = [
       { label: "Design Life", value: "30+ Years" },
     ],
     annotations: [
-      { label: "STRING 1 CIRCUIT", detail: "4 × 580W (2.32 kWp)", pos: [-1.8, 4.3, 0] },
-      { label: "STRING 2 CIRCUIT", detail: "4 × 580W (2.32 kWp)", pos: [1.8, 4.3, 0] },
-      { label: "FIRE SETBACK", detail: "300mm Ridge Clearance", pos: [0, 4.6, -1.8] },
+      { label: "STRING 1 CIRCUIT", detail: "4 × 580W (2.32 kWp)", pos: [-2.2, 4.0, 1.0] },
+      { label: "FIRE SETBACK", detail: "300mm Ridge Clearance", pos: [0.1, 5.4, -1.6] },
+      { label: "STRING 2 CIRCUIT", detail: "4 × 580W (2.32 kWp)", pos: [2.5, 4.0, 1.0] },
     ],
   },
   {
@@ -85,9 +85,9 @@ const STEPS: StepData[] = [
       { label: "Electrical Code", value: "PEC 2017 Compliant" },
     ],
     annotations: [
-      { label: "WIND LOAD RATED", detail: "250 km/h Typhoon Resistance", pos: [0, 4.4, 0] },
-      { label: "LGU DIGOS CLEARANCE", detail: "Permit No. 2026-3925", pos: [-2.5, 3.8, 1.5] },
-      { label: "TESDA NC II SEAL", detail: "Certified Master Electrician", pos: [2.5, 3.8, 1.5] },
+      { label: "LGU DIGOS CLEARANCE", detail: "Permit No. 2026-3925", pos: [-2.6, 3.8, 1.6] },
+      { label: "WIND LOAD RATED", detail: "250 km/h Typhoon Resistance", pos: [0.2, 5.3, -0.4] },
+      { label: "TESDA NC II SEAL", detail: "Certified Master Electrician", pos: [2.8, 3.8, 1.6] },
     ],
   },
   {
@@ -105,9 +105,9 @@ const STEPS: StepData[] = [
       { label: "Waterproofing", value: "EPDM Compression Gasket" },
     ],
     annotations: [
-      { label: "AL6005-T5 RAILS", detail: "Continuous C-Channel Rails", pos: [0, 4.2, 0.6] },
-      { label: "SUS304 L-FEET", detail: "Bolted into Rafters", pos: [2.2, 4.0, 1.4] },
-      { label: "EPDM WATERPROOF GASKET", detail: "UV-Resistant Flashing Seal", pos: [-2.2, 4.0, 1.4] },
+      { label: "EPDM WATERPROOF GASKET", detail: "UV-Resistant Flashing Seal", pos: [-2.5, 3.7, 1.6] },
+      { label: "AL6005-T5 RAILS", detail: "Continuous C-Channel Rails", pos: [0.2, 5.1, 0.2] },
+      { label: "SUS304 L-FEET", detail: "Bolted into Rafters", pos: [2.7, 3.7, 1.6] },
     ],
   },
   {
@@ -125,9 +125,9 @@ const STEPS: StepData[] = [
       { label: "Warranty", value: "25-Yr Linear Yield" },
     ],
     annotations: [
-      { label: "580W MONO MODULE", detail: "Tier-1 Half-Cut PERC", pos: [-1.2, 4.3, 0.4] },
-      { label: "MID-CLAMP & BOLT", detail: "Stainless Hex Torque Lock", pos: [0, 4.3, 0.4] },
-      { label: "TEMPERED ARC GLASS", detail: "Anti-Reflective Specular", pos: [1.8, 4.3, -0.6] },
+      { label: "580W MONO MODULE", detail: "Tier-1 Half-Cut PERC", pos: [-2.4, 4.0, 1.0] },
+      { label: "MID-CLAMP & BOLT", detail: "Stainless Hex Torque Lock", pos: [0.2, 5.2, 0.2] },
+      { label: "TEMPERED ARC GLASS", detail: "Anti-Reflective Specular", pos: [2.6, 4.1, -0.5] },
     ],
   },
   {
@@ -145,9 +145,9 @@ const STEPS: StepData[] = [
       { label: "Switchgear", value: "Dual DC/AC Isolators" },
     ],
     annotations: [
-      { label: "5kW HYBRID INVERTER", detail: "IP65 with Heatsink Fins", pos: [-4.6, 2.0, 0] },
-      { label: "10 kWh LiFePO4 BATTERY", detail: "Modular Energy Storage", pos: [-4.6, 0.8, 0] },
-      { label: "EMT SOLAR CONDUIT", detail: "Rigid Shielded Conduit", pos: [-4.6, 3.0, 0] },
+      { label: "EMT SOLAR CONDUIT", detail: "Rigid Shielded Conduit", pos: [-4.6, 3.2, -0.4] },
+      { label: "5kW HYBRID INVERTER", detail: "IP65 with Heatsink Fins", pos: [-4.3, 2.0, 0.4] },
+      { label: "10 kWh LiFePO4 BATTERY", detail: "Modular Energy Storage", pos: [-4.6, 0.8, -0.2] },
     ],
   },
   {
@@ -165,9 +165,9 @@ const STEPS: StepData[] = [
       { label: "Polarity Check", value: "100% Zero Defect" },
     ],
     annotations: [
-      { label: "VOLTAGE VERIFIED", detail: "382.4V DC String Voc Pass", pos: [-3.8, 2.2, 0.5] },
-      { label: "GROUND BONDING", detail: "< 3.5 Ω Ground Impedance", pos: [-4.6, 0.2, 0.5] },
-      { label: "LIVE CURRENT FLOW", detail: "DC-to-AC Conversion", pos: [-2.0, 3.2, 0.5] },
+      { label: "LIVE CURRENT FLOW", detail: "DC-to-AC Conversion", pos: [-1.8, 3.4, 0.6] },
+      { label: "VOLTAGE VERIFIED", detail: "382.4V DC String Voc Pass", pos: [-3.8, 2.2, 0.4] },
+      { label: "GROUND BONDING", detail: "< 3.5 Ω Ground Impedance", pos: [-4.7, 0.6, 0.2] },
     ],
   },
   {
@@ -185,9 +185,9 @@ const STEPS: StepData[] = [
       { label: "CO₂ Avoided", value: "5.8 Tons/Year" },
     ],
     annotations: [
-      { label: "4.64 kWp SOLAR ARRAY", detail: "Generating 100% Clean Power", pos: [0, 4.5, 0] },
-      { label: "NET METER EXPORT", detail: "Selling Surplus to Grid", pos: [-4.6, 1.8, 0] },
-      { label: "HOME POWERED", detail: "Appliances Run Free on Solar", pos: [1.5, 2.0, 2.0] },
+      { label: "4.64 kWp SOLAR ARRAY", detail: "Generating 100% Clean Power", pos: [0.4, 5.3, 0.1] },
+      { label: "NET METER EXPORT", detail: "Selling Surplus to Grid", pos: [-4.8, 1.9, 0.2] },
+      { label: "HOME POWERED", detail: "Appliances Run Free on Solar", pos: [2.0, 2.0, 1.8] },
     ],
   },
 ];
@@ -209,21 +209,21 @@ function CameraController({
   const cameraWaypoints = useMemo(
     () => [
       // 01: Site Survey
-      { pos: new THREE.Vector3(0, 7.2, 13.5), target: new THREE.Vector3(0, 3.2, 0) },
+      { pos: new THREE.Vector3(-0.6, 7.2, 13.5), target: new THREE.Vector3(-0.6, 3.2, 0) },
       // 02: CAD Blueprint
-      { pos: new THREE.Vector3(1.5, 9.0, 9.0), target: new THREE.Vector3(0, 3.8, 0) },
+      { pos: new THREE.Vector3(1.2, 9.0, 9.0), target: new THREE.Vector3(-0.4, 3.8, 0) },
       // 03: Permitting
       { pos: new THREE.Vector3(-5.5, 6.8, 10.5), target: new THREE.Vector3(-0.5, 3.4, 0) },
       // 04: Racking & Mounting
-      { pos: new THREE.Vector3(3.8, 5.8, 5.8), target: new THREE.Vector3(0.5, 4.0, 0) },
+      { pos: new THREE.Vector3(3.5, 5.8, 5.8), target: new THREE.Vector3(0.2, 4.0, 0) },
       // 05: Module Assembly
-      { pos: new THREE.Vector3(-2.8, 5.4, 6.8), target: new THREE.Vector3(0, 3.9, 0) },
+      { pos: new THREE.Vector3(-2.6, 5.4, 6.8), target: new THREE.Vector3(-0.3, 3.9, 0) },
       // 06: Hybrid Inverter & Battery (Camera glides to the left utility wall)
       { pos: new THREE.Vector3(-7.5, 2.4, 3.6), target: new THREE.Vector3(-4.5, 1.4, 0) },
       // 07: Testing & Voltage Verification
       { pos: new THREE.Vector3(-4.8, 4.8, 10.5), target: new THREE.Vector3(-1.2, 2.6, 0) },
       // 08: Commissioned Hero Shot
-      { pos: new THREE.Vector3(5.5, 6.8, 12.5), target: new THREE.Vector3(0, 3.0, 0) },
+      { pos: new THREE.Vector3(5.2, 6.8, 12.5), target: new THREE.Vector3(-0.4, 3.0, 0) },
     ],
     []
   );
@@ -800,7 +800,7 @@ export default function SolarProcess3D() {
         >
           <Canvas
             shadows
-            camera={{ position: [0, 7.2, 13.5], fov: 46, near: 0.1, far: 200 }}
+            camera={{ position: [-0.6, 7.2, 13.5], fov: 46, near: 0.1, far: 200 }}
             gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
             dpr={[1, 1.5]}
           >

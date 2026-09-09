@@ -85,7 +85,7 @@ export default function HomePage() {
               <span style={{ color: "var(--color-fro-green)" }}>with the Sun.</span>
             </h1>
             <p style={{ color: "rgba(255,255,255,0.78)", fontSize: "1.125rem", maxWidth: "50ch", marginBottom: "2.25rem", lineHeight: 1.7, fontFamily: "var(--font-body)" }}>
-              Solar installation across Davao del Sur by engineers who have commissioned power plants up to 175 MW across seven countries.
+              Solar installation across the Philippines by engineers who have commissioned power plants up to 175 MW across seven countries.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.875rem", alignItems: "center" }}>
               <a href="#contact" className="btn-primary" id="hero-cta">Request a Quote</a>
@@ -278,13 +278,13 @@ export default function HomePage() {
           <h2 style={{ color: "#fff", fontSize: "clamp(2rem, 4vw, 3.25rem)", marginBottom: "1rem", letterSpacing: "-0.03em" }}>Ready to Go Solar?</h2>
           <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1.0625rem", margin: "0 auto 2.5rem", maxWidth: "46ch" }}>Talk to our engineers about the right system for your home or business. No obligation, free site assessment.</p>
           <div className="flex flex-wrap justify-center gap-4 mb-14">
-            <a href="tel:+6309063665473" className="btn-primary" id="contact-call-cta">Call 0906-366-5473</a>
+            <a href="tel:+639063665473" className="btn-primary" id="contact-call-cta">Call 0906-366-5473</a>
             <a href="mailto:frosolar.energysolutions@gmail.com" className="btn-ghost" id="contact-email-cta">Email Us</a>
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "2rem" }}>
-            <ContactLink href="tel:+6309063665473" iconName="phone" text="082-272-0011 / 0906-366-5473" />
+            <ContactLink href="tel:+639063665473" iconName="phone" text="082-272-0011 / 0906-366-5473" />
             <ContactLink href="mailto:frosolar.energysolutions@gmail.com" iconName="email" text="frosolar.energysolutions@gmail.com" />
-            
+            <ContactLink href="https://maps.google.com/?q=Sta.+Ana+Road,+Tiguman,+Digos+City,+Davao+del+Sur" iconName="map" text="Sta. Ana Road, Digos City" />
           </div>
         </div>
         <footer style={{ background: "var(--color-fro-teal-dark)", padding: "1.25rem 1.5rem", textAlign: "center", position: "relative", zIndex: 1, borderTop: "1px solid rgba(255,255,255,0.05)" }}>

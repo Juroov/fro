@@ -317,12 +317,12 @@ export function HighFidelitySolarPanel({
           </mesh>
         ))}
         {/* Black UV-rated DC cables exiting junction box */}
-        <mesh position={[-0.08, -0.01, 0.1]}>
-          <cylinderGeometry args={[0.007, 0.007, 0.14, 8]} rotation={[Math.PI / 3, 0, 0]} />
+        <mesh position={[-0.08, -0.01, 0.1]} rotation={[Math.PI / 3, 0, 0]}>
+          <cylinderGeometry args={[0.007, 0.007, 0.14, 8]} />
           <meshStandardMaterial color={0x0d0d0d} roughness={0.5} />
         </mesh>
-        <mesh position={[0.08, -0.01, 0.1]}>
-          <cylinderGeometry args={[0.007, 0.007, 0.14, 8]} rotation={[Math.PI / 3, 0, 0]} />
+        <mesh position={[0.08, -0.01, 0.1]} rotation={[Math.PI / 3, 0, 0]}>
+          <cylinderGeometry args={[0.007, 0.007, 0.14, 8]} />
           <meshStandardMaterial color={0x0d0d0d} roughness={0.5} />
         </mesh>
         {/* Red/Black MC4 Connector Plugs */}
@@ -537,8 +537,8 @@ export function RealisticUtilityElectricalSystem({ activeStep }: { activeStep: n
         </mesh>
 
         {/* OLED Digital Telemetry Display */}
-        <mesh position={[0.126, 0.05, 0]}>
-          <planeGeometry args={[0.26, 0.12]} rotation={[0, Math.PI / 2, 0]} />
+        <mesh position={[0.126, 0.05, 0]} rotation={[0, Math.PI / 2, 0]}>
+          <planeGeometry args={[0.26, 0.12]} />
           <meshStandardMaterial
             color={isPowered ? 0x051e16 : 0x0a0f18}
             emissive={isPowered ? 0x8dc63f : 0x000000}
@@ -974,8 +974,8 @@ export function ModernTropicalSolarVilla({ activeStep }: { activeStep: number })
             </mesh>
           ))}
           {Array.from({ length: 12 }).map((_, i) => (
-            <mesh key={i} position={[0, -1.9 + i * 0.35, 0]} castShadow>
-              <cylinderGeometry args={[0.014, 0.014, 0.44, 8]} rotation={[0, 0, Math.PI / 2]} />
+            <mesh key={i} position={[0, -1.9 + i * 0.35, 0]} rotation={[0, 0, Math.PI / 2]} castShadow>
+              <cylinderGeometry args={[0.014, 0.014, 0.44, 8]} />
               <meshStandardMaterial color={0xd5d8de} metalness={0.92} />
             </mesh>
           ))}
@@ -1172,45 +1172,101 @@ export function Annotation3D({
   item: { label: string; detail: string; pos: [number, number, number] };
   color: string;
 }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <group position={item.pos}>
-      <Html center distanceFactor={14}>
+      <Html center distanceFactor={14} zIndexRange={[100, 0]}>
         <div
           style={{
-            background: "rgba(7, 31, 30, 0.94)",
-            backdropFilter: "blur(14px)",
-            WebkitBackdropFilter: "blur(14px)",
-            border: `1px solid ${color}`,
-            borderRadius: 10,
-            padding: "0.45rem 0.85rem",
-            boxShadow: `0 8px 24px rgba(0,0,0,0.5), 0 0 12px ${color}33`,
-            pointerEvents: "none",
-            whiteSpace: "nowrap",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             transform: "translate(-50%, -100%)",
+            pointerEvents: "auto",
+            zIndex: isHovered ? 9999 : 10,
+            cursor: "pointer",
           }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
+          {/* Floating Callout Card */}
           <div
             style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 800,
-              fontSize: 10,
-              color: color,
-              letterSpacing: "0.06em",
-              marginBottom: 2,
+              background: "rgba(7, 31, 30, 0.95)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              border: `1px solid ${isHovered ? color : `${color}88`}`,
+              borderRadius: 9,
+              padding: "0.4rem 0.75rem",
+              boxShadow: isHovered
+                ? `0 12px 30px rgba(0,0,0,0.65), 0 0 18px ${color}88`
+                : `0 6px 20px rgba(0,0,0,0.45), 0 0 10px ${color}25`,
+              whiteSpace: "nowrap",
+              transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
+              transform: isHovered ? "scale(1.05)" : "scale(1)",
             }}
           >
-            {item.label}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                fontFamily: "var(--font-display)",
+                fontWeight: 800,
+                fontSize: 9.5,
+                color: color,
+                letterSpacing: "0.08em",
+                marginBottom: 2,
+                textTransform: "uppercase",
+              }}
+            >
+              <span
+                style={{
+                  width: 5,
+                  height: 5,
+                  borderRadius: "50%",
+                  background: color,
+                  boxShadow: `0 0 6px ${color}`,
+                  flexShrink: 0,
+                }}
+              />
+              <span>{item.label}</span>
+            </div>
+            <div
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: 11,
+                color: "#ffffff",
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {item.detail}
+            </div>
           </div>
+
+          {/* Leader Stem Line to 3D surface anchor */}
           <div
             style={{
-              fontFamily: "var(--font-body)",
-              fontSize: 11,
-              color: "#ffffff",
-              fontWeight: 600,
+              width: 1.5,
+              height: 16,
+              background: `linear-gradient(to bottom, ${color}88, ${color}33)`,
             }}
-          >
-            {item.detail}
-          </div>
+          />
+
+          {/* Anchor Dot Pin */}
+          <div
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: "50%",
+              background: color,
+              boxShadow: `0 0 8px ${color}`,
+              transform: "translateY(-1px)",
+            }}
+          />
         </div>
       </Html>
     </group>
@@ -1341,21 +1397,21 @@ export function RealisticCameraController({
   const cameraWaypoints = useMemo(
     () => [
       // 01: Site Survey & Drone Scan (Elevated front architectural elevation)
-      { pos: new THREE.Vector3(0, 7.2, 13.8), target: new THREE.Vector3(0, 3.2, 0) },
+      { pos: new THREE.Vector3(-0.6, 7.2, 13.8), target: new THREE.Vector3(-0.6, 3.2, 0) },
       // 02: CAD Blueprint (Angled roof layout perspective)
-      { pos: new THREE.Vector3(1.8, 9.2, 9.2), target: new THREE.Vector3(0, 3.8, 0) },
+      { pos: new THREE.Vector3(1.3, 9.2, 9.2), target: new THREE.Vector3(-0.4, 3.8, 0) },
       // 03: Permitting (Structural 3/4 engineering perspective)
       { pos: new THREE.Vector3(-5.5, 6.8, 10.5), target: new THREE.Vector3(-0.5, 3.4, 0) },
       // 04: Mounting Rails (Close framing on aluminum rails and L-feet)
-      { pos: new THREE.Vector3(3.8, 5.8, 6.0), target: new THREE.Vector3(0.5, 4.0, 0) },
+      { pos: new THREE.Vector3(3.5, 5.8, 6.0), target: new THREE.Vector3(0.2, 4.0, 0) },
       // 05: Module Assembly (Close framing on half-cut monocrystalline modules)
-      { pos: new THREE.Vector3(-2.8, 5.5, 6.8), target: new THREE.Vector3(0, 4.0, 0) },
+      { pos: new THREE.Vector3(-2.6, 5.5, 6.8), target: new THREE.Vector3(-0.3, 4.0, 0) },
       // 06: Hybrid Inverter & Battery (Camera glides to the left utility wall)
       { pos: new THREE.Vector3(-7.8, 2.3, 3.4), target: new THREE.Vector3(-4.6, 1.3, 0.2) },
       // 07: Testing & Voltage Verification (Mid-angle electrical check)
       { pos: new THREE.Vector3(-4.8, 4.8, 10.5), target: new THREE.Vector3(-1.5, 2.6, 0) },
       // 08: Commissioned Hero Shot (Dramatic sun-drenched wide angle)
-      { pos: new THREE.Vector3(5.8, 6.8, 12.8), target: new THREE.Vector3(0, 3.0, 0) },
+      { pos: new THREE.Vector3(5.4, 6.8, 12.8), target: new THREE.Vector3(-0.4, 3.0, 0) },
     ],
     []
   );

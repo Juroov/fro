@@ -117,7 +117,7 @@ export default function Navbar() {
           }}
         >
           <a
-            href="tel:+6309063665473"
+            href="tel:+639063665473"
             className="hidden lg:inline-flex items-center gap-1.5"
             style={{
               fontFamily: "var(--font-display)",
