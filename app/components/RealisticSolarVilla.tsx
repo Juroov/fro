@@ -2,7 +2,7 @@
 
 import React, { useMemo, useRef, useState, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Text, Html } from "@react-three/drei";
+import { Text, Html, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 /* ─────────────────────────────────────────────────────────────
@@ -1389,7 +1389,7 @@ export function RealisticCameraController({
   controlsRef,
 }: {
   activeStep: number;
-  controlsRef?: React.RefObject<any>;
+  controlsRef?: React.RefObject<React.ComponentRef<typeof OrbitControls> | null>;
 }) {
   const { camera } = useThree();
   const isTransitioningRef = useRef(true);

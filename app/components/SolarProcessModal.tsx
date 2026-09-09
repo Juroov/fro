@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo, Suspense, useCallback } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
+import Image from "next/image";
 import { Canvas } from "@react-three/fiber";
 import { Html, useProgress, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -249,7 +250,7 @@ export function SolarProcessModal({
 }) {
   const [activeStep, setActiveStep] = useState(0);
   const data = STEPS[activeStep];
-  const controlsRef = useRef<any>(null);
+  const controlsRef = useRef<React.ComponentRef<typeof OrbitControls>>(null);
   const stepAnnotations = STEPS[activeStep]?.annotations || [];
   const activeColor = STEPS[activeStep]?.color || "#8DC63F";
 
@@ -408,9 +409,11 @@ export function SolarProcessModal({
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
-          <img
+          <Image
             src="/fro-logo.png"
             alt="FRO Solar Logo"
+            width={120}
+            height={42}
             style={{ height: 42, width: "auto", objectFit: "contain" }}
           />
           <div>

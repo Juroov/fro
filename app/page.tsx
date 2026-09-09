@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Navbar from "./components/Navbar";
 import { ProjectCard, ContactLink, Reveal } from "./components/InteractiveCards";
 import HowItWorksTrigger from "./components/SolarProcessModal";
@@ -273,7 +274,7 @@ export default function HomePage() {
         <div aria-hidden="true" style={{ position: "absolute", bottom: -200, left: "50%", transform: "translateX(-50%)", width: 800, height: 600, background: "radial-gradient(ellipse, rgba(141,198,63,0.12) 0%, transparent 70%)", pointerEvents: "none" }} />
         <div className="fro-section fro-container" style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
           <div style={{ display: "flex", justifyContent: "center", marginBottom: "2rem" }}>
-            <img src="/fro-logo.png" alt="FRO Solar Energy Solution" style={{ height: 80, width: "auto", objectFit: "contain", filter: "brightness(1.1)" }} />
+            <Image src="/fro-logo.png" alt="FRO Solar Energy Solution" width={240} height={80} style={{ height: 80, width: "auto", objectFit: "contain", filter: "brightness(1.1)" }} />
           </div>
           <h2 style={{ color: "#fff", fontSize: "clamp(2rem, 4vw, 3.25rem)", marginBottom: "1rem", letterSpacing: "-0.03em" }}>Ready to Go Solar?</h2>
           <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "1.0625rem", margin: "0 auto 2.5rem", maxWidth: "46ch" }}>Talk to our engineers about the right system for your home or business. No obligation, free site assessment.</p>

@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -14,52 +15,52 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={`fro-nav ${scrolled ? "fro-nav--solid" : "fro-nav--transparent"}`}
-      aria-label="Main navigation"
       style={{
         position: "fixed",
         top: 0,
         left: 0,
         right: 0,
         zIndex: 50,
-        height: 76,
-        display: "flex",
-        alignItems: "center",
-        transition: "background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease",
-        background: scrolled
-          ? "rgba(7, 31, 30, 0.95)"
-          : "linear-gradient(180deg, rgba(7, 31, 30, 0.75) 0%, rgba(7, 31, 30, 0.25) 75%, transparent 100%)",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-        boxShadow: scrolled ? "0 1px 0 rgba(141,198,63,0.15)" : "none",
+        transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+        background: scrolled ? "rgba(7,31,30,0.92)" : "rgba(7,31,30,0.6)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        borderBottom: scrolled
+          ? "1px solid rgba(141,198,63,0.18)"
+          : "1px solid rgba(255,255,255,0.07)",
+        boxShadow: scrolled ? "0 8px 32px rgba(0,0,0,0.35)" : "none",
       }}
     >
       <div
-        className="fro-container"
+        className="fro-container px-6"
         style={{
-          width: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: "2rem",
+          height: 72,
         }}
       >
-        {/* Logo image — transparent PNG without white square background */}
+        {/* Brand logo */}
         <a
           href="#"
           aria-label="FRO Solar home"
           style={{ display: "flex", alignItems: "center", flexShrink: 0 }}
         >
-          <img
+          <Image
             src="/fro-logo-transparent.png"
             alt="FRO Solar Energy Solution"
+            width={160}
+            height={50}
+            priority
             style={{
               height: 50,
               width: "auto",

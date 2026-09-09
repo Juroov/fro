@@ -2,7 +2,7 @@
 
 import React, { useRef, useMemo, useState, useEffect, useCallback, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Text, Html, useProgress } from "@react-three/drei";
+import { Html, useProgress } from "@react-three/drei";
 import * as THREE from "three";
 import {
   ModernTropicalSolarVilla,
@@ -655,19 +655,16 @@ function LoadingScreen() {
 export default function SolarProcess3D() {
   const [activeStep, setActiveStep] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [webGLOk, setWebGLOk] = useState(true);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Check WebGL hardware support
-  useEffect(() => {
+  const [webGLOk] = useState(() => {
+    if (typeof window === "undefined") return true;
     try {
       const c = document.createElement("canvas");
-      const gl = c.getContext("webgl") || c.getContext("experimental-webgl");
-      if (!gl) setWebGLOk(false);
+      return !!(c.getContext("webgl") || c.getContext("experimental-webgl"));
     } catch {
-      setWebGLOk(false);
+      return false;
     }
-  }, []);
+  });
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Synchronize 3D camera & animation directly with page scroll
   useEffect(() => {
