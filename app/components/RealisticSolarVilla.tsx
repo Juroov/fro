@@ -1178,9 +1178,9 @@ export function Annotation3D({
     <group position={item.pos}>
       <Html center distanceFactor={14} zIndexRange={[100, 0]}>
         <div
+          className="hidden sm:flex"
           style={{
             position: "relative",
-            display: "flex",
             flexDirection: "column",
             alignItems: "center",
             transform: "translate(-50%, -100%)",

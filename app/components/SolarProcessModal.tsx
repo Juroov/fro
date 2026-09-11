@@ -389,7 +389,7 @@ export function SolarProcessModal({
         touchAction: "none",
       }}
     >
-      {/* ── TOP APP BAR ── */}
+      {/* ── TOP HUD HEADER BAR ── */}
       <header
         style={{
           position: "absolute",
@@ -398,23 +398,23 @@ export function SolarProcessModal({
           right: 0,
           zIndex: 50,
           height: 72,
-          padding: "0 2rem",
+          padding: "0 clamp(1rem, 3vw, 2rem)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          background: "rgba(7, 31, 30, 0.88)",
+          background: "rgba(7, 31, 30, 0.94)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderBottom: "1px solid rgba(141,198,63,0.15)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "1.25rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.875rem" }}>
           <Image
             src="/fro-logo.png"
             alt="FRO Solar Logo"
             width={120}
             height={42}
-            style={{ height: 42, width: "auto", objectFit: "contain" }}
+            style={{ height: "clamp(32px, 5vw, 42px)", width: "auto", objectFit: "contain" }}
           />
           <div>
             <div
@@ -424,12 +424,12 @@ export function SolarProcessModal({
                 gap: "0.5rem",
                 fontFamily: "var(--font-display)",
                 fontWeight: 800,
-                fontSize: "0.95rem",
+                fontSize: "clamp(0.8125rem, 2vw, 0.95rem)",
                 color: "#ffffff",
                 letterSpacing: "-0.01em",
               }}
             >
-              How It Works &mdash; 3D Installation Process
+              <span>3D Walkthrough</span>
               <span
                 style={{
                   fontSize: 10,
@@ -553,15 +553,16 @@ export function SolarProcessModal({
         <div
           style={{
             position: "absolute",
-            bottom: "5.5rem",
-            right: "2rem",
+            bottom: "clamp(1rem, 3vw, 5.5rem)",
+            right: "clamp(0.75rem, 2.5vw, 2rem)",
             zIndex: 40,
             display: "flex",
             alignItems: "center",
-            gap: "0.75rem",
+            gap: "0.5rem",
           }}
         >
           <div
+            className="hidden sm:flex"
             style={{
               background: "rgba(7, 31, 30, 0.88)",
               backdropFilter: "blur(12px)",
@@ -569,7 +570,6 @@ export function SolarProcessModal({
               border: "1px solid rgba(141,198,63,0.3)",
               borderRadius: 9999,
               padding: "0.45rem 1rem",
-              display: "flex",
               alignItems: "center",
               gap: "0.5rem",
               fontSize: 12,
@@ -617,13 +617,7 @@ export function SolarProcessModal({
 
         {/* ── LEFT HUD TELEMETRY CARD ── */}
         <div
-          style={{
-            position: "absolute",
-            top: "6.5rem",
-            left: "2rem",
-            zIndex: 40,
-            maxWidth: 420,
-          }}
+          className="absolute z-40 top-20 left-3 right-3 sm:top-24 sm:left-6 sm:right-auto sm:max-w-[390px] md:max-w-[420px] max-h-[calc(100dvh-130px)] overflow-y-auto"
         >
           <div
             style={{
@@ -631,8 +625,8 @@ export function SolarProcessModal({
               backdropFilter: "blur(20px)",
               WebkitBackdropFilter: "blur(20px)",
               border: `1px solid ${data.color}55`,
-              borderRadius: 20,
-              padding: "1.75rem",
+              borderRadius: 18,
+              padding: "clamp(1rem, 2.5vw, 1.75rem)",
               boxShadow: `0 24px 64px rgba(0,0,0,0.5), 0 0 32px ${data.color}18`,
               transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
@@ -816,13 +810,13 @@ export function SolarProcessModal({
 
         {/* ── RIGHT STEP PILL SELECTOR ── */}
         <div
+          className="hidden lg:flex"
           style={{
             position: "absolute",
             right: "2rem",
             top: "50%",
             transform: "translateY(-50%)",
             zIndex: 40,
-            display: "flex",
             flexDirection: "column",
             gap: "0.65rem",
           }}
@@ -883,6 +877,7 @@ export function SolarProcessModal({
 
         {/* ── BOTTOM HELPER / HINT ── */}
         <div
+          className="hidden md:block"
           style={{
             position: "absolute",
             bottom: "2rem",

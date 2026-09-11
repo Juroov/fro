@@ -13,9 +13,10 @@
 | Feature | Component | Status | Notes |
 |---|---|---|---|
 | 3D Solar Villa & Process Walkthrough | `SolarProcess3D.tsx`, `SolarProcessModal.tsx`, `RealisticSolarVilla.tsx` | Ready | 8 installation phases, non-overlapping annotations, glowing beacon pins, orbit controls & reset |
+| What We Install Path Gallery UI | `WhatWeInstallPathGallery.tsx` | Ready | 4-step energy conduit rail (01 Grid-Tied, 02 Hybrid, 03 Off-Grid, 04 Turnkey Electrical & Civil), animated power flow schematics, dual-pane showcase & real project credentials |
 | Interactive Cards & Animations | `InteractiveCards.tsx` | Ready | Motion / Framer Motion viewport reveal, reduced motion support |
 | Smooth Scrolling | `SmoothScrollProvider.tsx` | Ready | Lenis smooth scroll provider |
-| Navigation Header | `Navbar.tsx` | Ready | Sticky backdrop blur, mobile drawer, direct call CTA |
+| Navigation Header | `Navbar.tsx` | Ready | Liquid gliding glass indicator pill (`layoutId` spring physics), pill track, liquid phone capsule, brand aura, sticky backdrop blur, mobile drawer, direct call CTA |
 
 ## Credential & Data Audit (vs. `company-facts.md`)
 
@@ -37,3 +38,6 @@
 ## Session Log
 
 - **2026-09-09**: QA audit completed for initial deployment. Resolved 3D annotation collisions with staggered altitudes and leader pins. Verified phone dial formats, location links, metadata, and production build artifact generation.
+- **2026-09-11**: Cross-platform responsiveness overhaul across mobile (320px–430px), tablet (768px–1024px), and desktop. Implemented fluid clamp typography, mobile touch-first header with 1-tap call button and auto-closing drawer, responsive 2x2 credentials stats cards, responsive grid wraps, mobile-adapted 3D modal HUD telemetry, and verified zero horizontal overflow across devices.
+- **2026-09-11 (Path Gallery Transformation)**: Redesigned the "What We Install" (`#services`) section from a static 4-card grid into an interactive Path Gallery UI. Added an illuminated 4-waypoint energy conduit rail, dynamic dual-pane gallery stage with custom high-res jobsite photography, interactive 4-node power flow schematics, verified real-world project credentials (RJL Ricemill, Lt. Col. Solamo, Malita Elementary, Camp Sabros), and seamless integration with the 3D walkthrough feature banner.
+- **2026-09-11 (Liquid Navbar Hover)**: Implemented an organic liquid hover system on the desktop navbar (`Navbar.tsx` & `globals.css`) with a sleek pill track container, Framer Motion shared layout spring indicator pill (`layoutId="fro-navbar-liquid-pill"`), specular glare highlight, core ambient glow, liquid glass phone action pill, brand aura, and reduced motion accommodation.

@@ -65,9 +65,9 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-fro-teal);
 }
 
-h1 { font-size: clamp(2.75rem, 5.5vw, 4.5rem); }
-h2 { font-size: clamp(1.875rem, 3.5vw, 2.875rem); }
-h3 { font-size: clamp(1.125rem, 1.8vw, 1.375rem); }
+h1 { font-size: clamp(2.15rem, 6vw, 4.5rem); }
+h2 { font-size: clamp(1.625rem, 3.8vw, 2.875rem); }
+h3 { font-size: clamp(1.125rem, 2vw, 1.375rem); }
 h4 { font-size: 1.0625rem; }
 
 p {
@@ -94,22 +94,54 @@ a {
    Section Layout Utilities
 ───────────────────────────────────────────── */
 .fro-section {
-  padding: 7rem 1.5rem;
+  padding: 4.5rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .fro-section {
+    padding: 5.5rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .fro-section {
+    padding: 7rem 2rem;
+  }
 }
 
 .fro-container {
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-/* Hero Stats Grid — clean responsive borders */
+@media (min-width: 640px) {
+  .fro-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .fro-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Hero Stats Grid — clean responsive borders & mobile cards */
 .hero-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem 1.5rem;
+  gap: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .hero-stats-grid {
+    gap: 1.25rem 1.5rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -120,12 +152,18 @@ a {
 }
 
 .hero-stat-cell {
-  padding: 0.5rem 0.75rem;
+  padding: 0.75rem 0.875rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(141, 198, 63, 0.12);
+  border-radius: 12px;
 }
 
 @media (min-width: 768px) {
   .hero-stat-cell {
     padding: 1rem 1.75rem;
+    background: transparent;
+    border: none;
+    border-radius: 0;
   }
   .hero-stat-cell:not(:first-child) {
     border-left: 1px solid rgba(141, 198, 63, 0.18);
@@ -138,56 +176,97 @@ a {
 .btn-primary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  background: var(--color-fro-green);
+  min-height: 44px;
+  background: linear-gradient(135deg, var(--color-fro-green) 0%, #7dbb34 100%);
   color: #fff;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.9375rem;
-  padding: 0.875rem 2rem;
+  padding: 0.75rem 1.75rem;
   border-radius: var(--radius-button);
   border: none;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
   letter-spacing: -0.01em;
   box-shadow: 0 4px 18px rgba(141,198,63,0.3);
 }
 
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
 .btn-primary:hover {
-  background: var(--color-fro-green-dark);
-  box-shadow: 0 6px 24px rgba(141,198,63,0.4);
+  background: linear-gradient(135deg, #99d646 0%, var(--color-fro-green) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(141, 198, 63, 0.45), 0 0 16px rgba(141, 198, 63, 0.2);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
 }
 
 .btn-primary:active {
-  transform: scale(0.97);
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 2px 10px rgba(141, 198, 63, 0.3);
+}
+
+.btn-primary svg {
+  transition: transform 0.22s ease;
+}
+
+.btn-primary:hover svg {
+  transform: translateX(4px);
 }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  background: transparent;
-  color: rgba(255,255,255,0.9);
+  min-height: 44px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.95);
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.9375rem;
-  padding: 0.875rem 2rem;
+  padding: 0.75rem 1.75rem;
   border-radius: var(--radius-button);
-  border: 1.5px solid rgba(255,255,255,0.35);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease, transform 0.12s ease;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
   letter-spacing: -0.01em;
 }
 
 .btn-ghost:hover {
-  border-color: rgba(255,255,255,0.75);
-  background: rgba(255,255,255,0.08);
+  border-color: var(--color-fro-green);
+  color: #ffffff;
+  background: rgba(141, 198, 63, 0.14);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(141, 198, 63, 0.25), inset 0 0 12px rgba(141, 198, 63, 0.1);
 }
 
 .btn-ghost:active {
-  transform: scale(0.97);
+  transform: translateY(1px) scale(0.97);
 }
 
 /* ─────────────────────────────────────────────
@@ -198,13 +277,13 @@ a {
   border-radius: var(--radius-card);
   overflow: hidden;
   border: 1px solid var(--color-fro-border);
-  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
 .fro-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(141,198,63,0.35);
-  box-shadow: 0 20px 52px rgba(14,75,72,0.1);
+  transform: translateY(-6px);
+  border-color: rgba(141, 198, 63, 0.45);
+  box-shadow: 0 22px 54px rgba(14, 75, 72, 0.14), 0 0 16px rgba(141, 198, 63, 0.1);
 }
 
 /* ─────────────────────────────────────────────
@@ -222,6 +301,7 @@ a {
   padding: 0.25rem 0.65rem;
   border-radius: 6px;
   letter-spacing: 0.01em;
+  transition: all 0.22s ease;
 }
 
 /* ─────────────────────────────────────────────
@@ -233,13 +313,13 @@ a {
   background: var(--color-fro-white);
   padding: 1.75rem;
   position: relative;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fro-cert-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
   border-color: var(--color-fro-orange);
-  box-shadow: 0 12px 36px rgba(247,148,29,0.1);
+  box-shadow: 0 16px 42px rgba(247, 148, 29, 0.16), 0 0 20px rgba(247, 148, 29, 0.08);
 }
 
 .fro-cert-accent {
@@ -248,6 +328,12 @@ a {
   background: var(--color-fro-orange);
   border-radius: 2px;
   margin-bottom: 1.25rem;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.fro-cert-card:hover .fro-cert-accent {
+  width: 64px;
+  box-shadow: 0 0 12px rgba(247, 148, 29, 0.5);
 }
 
 /* ─────────────────────────────────────────────
@@ -265,16 +351,387 @@ a {
   transition: background 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
 }
 
-.fro-nav--transparent {
-  background: transparent;
-  box-shadow: none;
+/* ─────────────────────────────────────────────
+   Responsive Navigation Utilities
+───────────────────────────────────────────── */
+.desktop-nav-links {
+  display: none !important;
 }
 
-.fro-nav--solid {
-  background: rgba(7,31,30,0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 1px 0 rgba(141,198,63,0.12);
+@media (min-width: 1024px) {
+  .desktop-nav-links {
+    display: flex !important;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.25rem 0.35rem;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Liquid Navigation & Glass Pill Hover
+───────────────────────────────────────────── */
+.fro-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  border-radius: 9999px;
+  padding: 0.2rem 0.4rem;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-nav-brand::before {
+  content: "";
+  position: absolute;
+  inset: -4px -8px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(141, 198, 63, 0.22) 0%, rgba(14, 75, 72, 0.08) 55%, transparent 75%);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.fro-nav-brand:hover {
+  transform: translateY(-1px);
+}
+
+.fro-nav-brand:hover::before {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* Liquid Pill Nav Track Container */
+.fro-nav-liquid-track {
+  position: relative;
+  background: rgba(7, 31, 30, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9999px;
+  padding: 0.25rem 0.35rem;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    0 8px 24px -4px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.fro-nav-item {
+  position: relative;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fro-nav-link {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.90625rem;
+  color: rgba(255, 255, 255, 0.82);
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.2s ease;
+  user-select: none;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.fro-nav-link:hover,
+.fro-nav-link.is-active {
+  color: #ffffff;
+  text-shadow: 0 0 14px rgba(141, 198, 63, 0.65);
+}
+
+/* Liquid Gliding Indicator Pill */
+.fro-navbar-liquid-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(14, 75, 72, 0.85) 0%, rgba(141, 198, 63, 0.32) 100%);
+  border: 1px solid rgba(141, 198, 63, 0.5);
+  box-shadow:
+    0 4px 20px -2px rgba(141, 198, 63, 0.4),
+    0 0 16px rgba(14, 75, 72, 0.65),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px) saturate(140%);
+  -webkit-backdrop-filter: blur(8px) saturate(140%);
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Liquid Pill Specular Top Glare & Ambient Core */
+.fro-liquid-pill-glare {
+  position: absolute;
+  top: 1px;
+  left: 10%;
+  right: 10%;
+  height: 44%;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+.fro-liquid-pill-core {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 120%, rgba(141, 198, 63, 0.4) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+/* Liquid Action Pill for Phone CTA */
+.fro-nav-liquid-pill-btn {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: -0.01em;
+  padding: 0.5rem 0.95rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 0.4rem;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.fro-nav-liquid-pill-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(141, 198, 63, 0.22) 0%, rgba(14, 75, 72, 0.45) 100%);
+  opacity: 0;
+  transform: scale(0.88);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+
+.fro-nav-liquid-pill-btn:hover {
+  color: #ffffff;
+  border-color: rgba(141, 198, 63, 0.55);
+  box-shadow: 0 4px 18px rgba(141, 198, 63, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.fro-nav-liquid-pill-btn:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fro-nav-liquid-pill-btn svg,
+.fro-nav-liquid-pill-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-nav-toggle {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .mobile-nav-toggle {
+    display: none !important;
+  }
+}
+
+.desktop-header-action {
+  display: none !important;
+}
+
+@media (min-width: 1024px) {
+  .desktop-header-action {
+    display: inline-flex !important;
+  }
+}
+
+.mobile-call-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .mobile-call-btn {
+    display: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   3D Walkthrough Feature Banner
+───────────────────────────────────────────── */
+.fro-feature-banner {
+  margin-top: 3.5rem;
+  padding: 1.75rem 1.25rem;
+  background: var(--color-fro-teal);
+  border-radius: var(--radius-card);
+  box-shadow: 0 16px 40px rgba(14,75,72,0.14);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .fro-feature-banner {
+    padding: 2.25rem 2rem;
+  }
+}
+
+@media (min-width: 920px) {
+  .fro-feature-banner {
+    flex-direction: row;
+    align-items: center;
+    padding: 2.25rem 2.75rem;
+    gap: 2.5rem;
+  }
+}
+
+.fro-feature-banner {
+  margin-top: 3.5rem;
+  background: linear-gradient(135deg, #071F1E 0%, #0E4B48 60%, #135E5B 100%);
+  border: 1px solid rgba(141, 198, 63, 0.22);
+  border-radius: calc(var(--radius-card) + 4px);
+  padding: 2.25rem 2.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75rem;
+  box-shadow: 0 20px 50px rgba(7, 31, 30, 0.25);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-feature-banner:hover {
+  border-color: rgba(141, 198, 63, 0.48);
+  box-shadow: 0 28px 70px -10px rgba(7, 31, 30, 0.45), 0 0 35px rgba(141, 198, 63, 0.15);
+  transform: translateY(-3px);
+}
+
+.fro-feature-banner-btn {
+  width: 100%;
+}
+
+@media (min-width: 920px) {
+  .fro-feature-banner-btn {
+    width: auto;
+    flex-shrink: 0;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Solar Panel Introduction Section
+───────────────────────────────────────────── */
+.fro-solar-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .fro-solar-intro-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+.fro-solar-pillar-card {
+  background: var(--color-fro-white);
+  border: 1px solid var(--color-fro-border);
+  border-radius: var(--radius-card);
+  padding: 2.25rem 1.85rem;
+  display: flex;
+  flex-direction: column;
+  justifyContent: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-solar-pillar-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-fro-green), var(--color-fro-teal));
+  opacity: 0;
+  transform: scaleX(0.2);
+  transform-origin: left;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-solar-pillar-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(141, 198, 63, 0.5);
+  box-shadow: 0 22px 50px -10px rgba(14, 75, 72, 0.14), 0 0 20px rgba(141, 198, 63, 0.1);
+}
+
+.fro-solar-pillar-card:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.fro-specs-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 3.5rem;
+  padding: 1.75rem 1.5rem;
+  background: var(--color-fro-surface);
+  border: 1px solid var(--color-fro-border);
+  border-radius: var(--radius-card);
+}
+
+@media (min-width: 768px) {
+  .fro-specs-strip {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 1.85rem 2.5rem;
+    gap: 1.75rem;
+  }
+}
+
+.fro-specs-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-specs-item:hover {
+  background: rgba(14, 75, 72, 0.04);
+  transform: translateY(-2px);
+}
+
+.fro-specs-item:hover span:first-child {
+  transform: scale(1.04);
+  transform-origin: left;
+}
+
+@media (min-width: 768px) {
+  .fro-specs-item:not(:first-child) {
+    border-left: 1px solid rgba(14, 75, 72, 0.12);
+    padding-left: 1.75rem;
+  }
 }
 
 /* ─────────────────────────────────────────────
@@ -285,13 +742,20 @@ a {
   border: 1px solid rgba(141,198,63,0.12);
   border-radius: var(--radius-card);
   padding: 1.5rem;
-  transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+  transition: all 0.26s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fro-project-card:hover {
   background: rgba(255,255,255,0.09);
-  border-color: rgba(141,198,63,0.3);
-  transform: translateY(-3px);
+  border-color: rgba(141,198,63,0.4);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 18px 42px rgba(0,0,0,0.35), inset 0 1px 0 rgba(141,198,63,0.35);
+}
+
+.fro-project-card:hover .fro-badge {
+  background: rgba(141,198,63,0.28);
+  box-shadow: 0 0 14px rgba(141,198,63,0.4);
+  color: #a4dc55;
 }
 
 /* ─────────────────────────────────────────────
@@ -315,6 +779,724 @@ a {
 }
 
 /* ─────────────────────────────────────────────
+   What We Install - Path Gallery UI
+───────────────────────────────────────────── */
+.fro-path-gallery-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* 1. Path Waypoint Rail */
+.fro-path-rail-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.fro-path-rail-track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(230px, 1fr));
+  gap: 0.875rem;
+  min-width: 100%;
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  .fro-path-rail-track {
+    display: flex;
+    min-width: max-content;
+    padding: 0.25rem 0.25rem 0.5rem;
+  }
+}
+
+.fro-path-node-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  background: var(--color-fro-surface);
+  border: 1px solid var(--color-fro-border);
+  border-radius: var(--radius-card);
+  padding: 0.875rem 1.125rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 64px;
+}
+
+.fro-path-node-btn:hover {
+  background: rgba(14, 75, 72, 0.08);
+  border-color: rgba(14, 75, 72, 0.35);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(14, 75, 72, 0.1);
+}
+
+.fro-path-node-btn:hover .fro-path-node-badge {
+  transform: scale(1.1) rotate(-4deg);
+  background: rgba(141, 198, 63, 0.22);
+  color: var(--color-fro-teal-dark);
+}
+
+.fro-path-node-btn.active {
+  background: #071F1E;
+  border-color: rgba(141, 198, 63, 0.5);
+  box-shadow: 0 10px 25px -5px rgba(7, 31, 30, 0.25), 0 0 0 1px rgba(141, 198, 63, 0.3);
+}
+
+.fro-path-node-btn.active:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -4px rgba(7, 31, 30, 0.4), 0 0 20px rgba(141, 198, 63, 0.35);
+}
+
+.fro-path-node-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(14, 75, 72, 0.08);
+  color: var(--color-fro-teal);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  position: relative;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-path-node-btn.active .fro-path-node-badge {
+  background: var(--color-fro-green);
+  color: #071F1E;
+  font-weight: 800;
+}
+
+.fro-path-node-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-fro-green);
+  border: 2px solid var(--color-fro-white);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.fro-path-node-btn.active .fro-path-node-dot {
+  opacity: 1;
+  border-color: #071F1E;
+}
+
+.fro-path-node-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.fro-path-node-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--color-fro-teal-dark);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s ease;
+}
+
+.fro-path-node-btn.active .fro-path-node-title {
+  color: #ffffff;
+}
+
+.fro-path-node-tag {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-fro-ink-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s ease;
+}
+
+.fro-path-node-btn.active .fro-path-node-tag {
+  color: var(--color-fro-green);
+}
+
+.fro-path-node-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  border: 2px solid var(--color-fro-green);
+  pointer-events: none;
+}
+
+/* 2. Dynamic Dual-Pane Stage */
+.fro-path-stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  background: #071F1E;
+  border: 1px solid rgba(141, 198, 63, 0.22);
+  border-radius: calc(var(--radius-card) + 4px);
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  box-shadow: 0 24px 60px rgba(7, 31, 30, 0.28);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fro-path-stage:hover {
+  border-color: rgba(141, 198, 63, 0.38);
+  box-shadow: 0 32px 75px rgba(7, 31, 30, 0.38), 0 0 35px rgba(141, 198, 63, 0.08);
+}
+
+@media (min-width: 1024px) {
+  .fro-path-stage {
+    grid-template-columns: 1.05fr 1.2fr;
+    gap: 2.25rem;
+    align-items: stretch;
+  }
+}
+
+/* Left Pane - Visual Showcase */
+.fro-path-visual-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fro-path-main-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 280px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #04100F;
+}
+
+.fro-path-main-image {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-path-main-image-wrapper:hover .fro-path-main-image {
+  transform: scale(1.04);
+}
+
+.fro-path-image-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(7, 31, 30, 0.4) 0%,
+    rgba(7, 31, 30, 0.1) 40%,
+    rgba(7, 31, 30, 0.75) 75%,
+    rgba(7, 31, 30, 0.96) 100%
+  );
+  pointer-events: none;
+}
+
+.fro-path-floating-badges {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fro-path-kicker-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(7, 31, 30, 0.85);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(141, 198, 63, 0.4);
+}
+
+.fro-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-fro-green);
+  box-shadow: 0 0 10px var(--color-fro-green);
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.fro-path-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(141, 198, 63, 0.18);
+  backdrop-filter: blur(8px);
+  color: var(--color-fro-green);
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(141, 198, 63, 0.35);
+  white-space: nowrap;
+}
+
+.fro-path-project-callout {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 2;
+  background: rgba(7, 31, 30, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(141, 198, 63, 0.25);
+  border-radius: 12px;
+  padding: 0.875rem 1.125rem;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-path-project-callout:hover {
+  background: rgba(7, 31, 30, 0.94);
+  border-color: rgba(141, 198, 63, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.fro-path-project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.fro-path-project-label {
+  font-size: 0.625rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--color-fro-green);
+  text-transform: uppercase;
+}
+
+.fro-path-project-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.fro-path-project-cap {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Thumbnails */
+.fro-path-thumb-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fro-path-thumb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem 0.35rem 0.35rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-path-thumb-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(141, 198, 63, 0.5);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.fro-path-thumb-btn:hover .fro-path-thumb-img-wrapper img {
+  transform: scale(1.15);
+}
+
+.fro-path-thumb-btn.active {
+  background: rgba(141, 198, 63, 0.15);
+  border-color: var(--color-fro-green);
+  color: var(--color-fro-green);
+}
+
+.fro-path-thumb-img-wrapper {
+  position: relative;
+  width: 32px;
+  height: 24px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.fro-path-thumb-img-wrapper img {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-path-thumb-caption {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: auto;
+  font-style: italic;
+}
+
+/* Right Pane - Specs & Schematic */
+.fro-path-specs-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  color: #ffffff;
+  min-width: 0;
+}
+
+.fro-path-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fro-path-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.fro-path-header-tag {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  color: var(--color-fro-green);
+  text-transform: uppercase;
+}
+
+.fro-path-header-scale {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+}
+
+.fro-path-title {
+  font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.fro-path-subtitle {
+  font-size: 0.9375rem;
+  color: var(--color-fro-green);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.fro-path-desc {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+  margin: 0.35rem 0 0 0;
+  max-width: 65ch;
+}
+
+/* Power Flow Schematic */
+.fro-path-schematic-section {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(141, 198, 63, 0.15);
+  border-radius: 12px;
+  padding: 1rem 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fro-schematic-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fro-schematic-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  color: var(--color-fro-green);
+  text-transform: uppercase;
+}
+
+.fro-schematic-hint {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.fro-schematic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+@media (min-width: 640px) {
+  .fro-schematic-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.fro-schematic-node {
+  background: rgba(7, 31, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.fro-schematic-node:hover {
+  background: rgba(14, 75, 72, 0.85);
+  border-color: rgba(141, 198, 63, 0.55);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28), 0 0 16px rgba(141, 198, 63, 0.22);
+}
+
+.fro-schematic-node-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fro-schematic-step {
+  font-size: 0.625rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-fro-green);
+  text-transform: uppercase;
+  transition: text-shadow 0.2s ease;
+}
+
+.fro-schematic-node:hover .fro-schematic-step {
+  text-shadow: 0 0 8px rgba(141, 198, 63, 0.8);
+}
+
+.fro-schematic-arrow {
+  color: var(--color-fro-green);
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: transform 0.22s ease, color 0.2s ease;
+}
+
+.fro-schematic-node:hover .fro-schematic-arrow {
+  transform: translateX(4px);
+  color: #bbf866;
+}
+
+.fro-schematic-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fro-schematic-detail {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Metrics Grid */
+.fro-path-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .fro-path-metrics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.fro-path-metric-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.75rem 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.fro-path-metric-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(141, 198, 63, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28), 0 0 14px rgba(141, 198, 63, 0.12);
+}
+
+.fro-metric-label {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.fro-metric-val {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--color-fro-green);
+  line-height: 1.2;
+  transition: all 0.22s ease;
+}
+
+.fro-path-metric-card:hover .fro-metric-val {
+  text-shadow: 0 0 14px rgba(141, 198, 63, 0.8);
+  transform: scale(1.05);
+  transform-origin: left;
+}
+
+.fro-metric-note {
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.48);
+  line-height: 1.3;
+}
+
+/* Footer Action */
+.fro-path-footer-action {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fro-path-ideal-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.fro-path-ideal-title {
+  font-size: 0.625rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.fro-path-ideal-text {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.fro-path-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.fro-path-quote-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.45rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  min-height: 44px;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-fro-green) 0%, #7dbb34 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(141, 198, 63, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fro-path-quote-btn:hover {
+  background: linear-gradient(135deg, #99d646 0%, var(--color-fro-green) 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(141, 198, 63, 0.5), 0 0 16px rgba(141, 198, 63, 0.25);
+}
+
+.fro-path-quote-btn svg {
+  transition: transform 0.22s ease;
+}
+
+.fro-path-quote-btn:hover svg {
+  transform: translateX(4px);
+}
+
+.fro-path-quote-btn:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+/* ─────────────────────────────────────────────
    Reduced Motion
 ───────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
@@ -324,3 +1506,4 @@ a {
     transition-duration: 0.01ms !important;
   }
 }
+

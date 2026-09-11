@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -13,6 +14,8 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hoveredNavIndex, setHoveredNavIndex] = useState<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,240 +25,326 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close menu on escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && open) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
+
   return (
-    <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
-        background: scrolled ? "rgba(7,31,30,0.92)" : "rgba(7,31,30,0.6)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        borderBottom: scrolled
-          ? "1px solid rgba(141,198,63,0.18)"
-          : "1px solid rgba(255,255,255,0.07)",
-        boxShadow: scrolled ? "0 8px 32px rgba(0,0,0,0.35)" : "none",
-      }}
-    >
-      <div
-        className="fro-container px-6"
+    <>
+      <nav
+        aria-label="Main Navigation"
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: 72,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
+          background: scrolled ? "rgba(7,31,30,0.94)" : "rgba(7,31,30,0.65)",
+          backdropFilter: "blur(18px)",
+          WebkitBackdropFilter: "blur(18px)",
+          borderBottom: scrolled
+            ? "1px solid rgba(141,198,63,0.18)"
+            : "1px solid rgba(255,255,255,0.07)",
+          boxShadow: scrolled ? "0 8px 32px rgba(0,0,0,0.35)" : "none",
         }}
       >
-        {/* Brand logo */}
-        <a
-          href="#"
-          aria-label="FRO Solar home"
-          style={{ display: "flex", alignItems: "center", flexShrink: 0 }}
-        >
-          <Image
-            src="/fro-logo-transparent.png"
-            alt="FRO Solar Energy Solution"
-            width={160}
-            height={50}
-            priority
-            style={{
-              height: 50,
-              width: "auto",
-              objectFit: "contain",
-              filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.4))",
-            }}
-          />
-        </a>
-
-        {/* Desktop links */}
-        <ul
-          className="hidden lg:flex items-center"
-          style={{
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-            display: "flex",
-            alignItems: "center",
-            gap: "2rem",
-          }}
-          role="list"
-        >
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                style={{
-                  fontFamily: "var(--font-display)",
-                  fontWeight: 500,
-                  fontSize: "0.9375rem",
-                  color: "rgba(255,255,255,0.85)",
-                  transition: "color 0.2s ease",
-                  letterSpacing: "-0.01em",
-                }}
-                onMouseEnter={(e) =>
-                  ((e.target as HTMLElement).style.color = "var(--color-fro-green)")
-                }
-                onMouseLeave={(e) =>
-                  ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.85)")
-                }
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA + Phone Actions */}
         <div
+          className="fro-container"
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "1.25rem",
-            flexShrink: 0,
+            justifyContent: "space-between",
+            height: 72,
           }}
         >
+          {/* Brand logo */}
           <a
-            href="tel:+639063665473"
-            className="hidden lg:inline-flex items-center gap-1.5"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 500,
-              fontSize: "0.875rem",
-              color: "rgba(255,255,255,0.8)",
-              letterSpacing: "-0.01em",
-              padding: "0.375rem 0.75rem",
-              borderRadius: "9999px",
-              background: "rgba(255,255,255,0.06)",
-              border: "1px solid rgba(255,255,255,0.12)",
-              transition: "all 0.2s ease",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.color = "#fff";
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(141,198,63,0.4)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.8)";
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.12)";
-            }}
+            href="#"
+            aria-label="FRO Solar home"
+            className="fro-nav-brand"
+            style={{ display: "flex", alignItems: "center", flexShrink: 0 }}
           >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="var(--color-fro-green)"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-            </svg>
-            0906-366-5473
-          </a>
-
-          <a
-            href="#contact"
-            className="btn-primary hidden md:inline-flex"
-            style={{
-              fontSize: "0.875rem",
-              padding: "0.625rem 1.35rem",
-              boxShadow: "0 4px 14px rgba(141,198,63,0.3)",
-            }}
-          >
-            Get a Quote
-          </a>
-
-          {/* Hamburger */}
-          <button
-            id="mobile-menu-toggle"
-            onClick={() => setOpen(!open)}
-            className="lg:hidden p-2"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            style={{ background: "none", border: "none", cursor: "pointer" }}
-          >
-            <span
+            <Image
+              src="/fro-logo-transparent.png"
+              alt="FRO Solar Energy Solution"
+              width={160}
+              height={50}
+              priority
               style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: open ? 0 : 5,
-                width: 22,
+                height: "clamp(38px, 5vw, 50px)",
+                width: "auto",
+                objectFit: "contain",
+                filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.4))",
+              }}
+            />
+          </a>
+
+          {/* Desktop links with organic liquid hover pill */}
+          <ul
+            className="desktop-nav-links fro-nav-liquid-track"
+            role="list"
+            onMouseLeave={() => setHoveredNavIndex(null)}
+          >
+            {navLinks.map((link, idx) => {
+              const isHovered = hoveredNavIndex === idx;
+              return (
+                <li
+                  key={link.href}
+                  className="fro-nav-item"
+                  onMouseEnter={() => setHoveredNavIndex(idx)}
+                >
+                  <AnimatePresence>
+                    {isHovered && (
+                      <motion.div
+                        layoutId={shouldReduceMotion ? undefined : "fro-navbar-liquid-pill"}
+                        className="fro-navbar-liquid-pill"
+                        initial={{ opacity: 0, scale: 0.94 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 420,
+                          damping: 32,
+                          mass: 0.7,
+                        }}
+                        aria-hidden="true"
+                      >
+                        <span className="fro-liquid-pill-glare" />
+                        <span className="fro-liquid-pill-core" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  <a
+                    href={link.href}
+                    className={`fro-nav-link ${isHovered ? "is-active" : ""}`}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* CTA + Phone Actions */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.75rem",
+              flexShrink: 0,
+            }}
+          >
+            {/* Desktop phone link with liquid glass capsule */}
+            <a
+              href="tel:+639063665473"
+              className="desktop-header-action fro-nav-liquid-pill-btn"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--color-fro-green)"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+              <span>0906-366-5473</span>
+            </a>
+
+            {/* Desktop Quote Button */}
+            <a
+              href="#contact"
+              className="btn-primary desktop-header-action"
+              style={{
+                fontSize: "0.875rem",
+                padding: "0.625rem 1.35rem",
+                boxShadow: "0 4px 14px rgba(141,198,63,0.3)",
               }}
             >
-              {[0, 1, 2].map((i) => (
-                <span
-                  key={i}
-                  style={{
-                    display: "block",
-                    height: 2,
-                    background: "#fff",
-                    borderRadius: 2,
-                    width: i === 1 ? 16 : 22,
-                    transition: "all 0.2s ease",
-                    opacity: open && i === 1 ? 0 : 1,
-                    transform:
-                      open && i === 0
-                        ? "rotate(45deg) translate(5px,5px)"
-                        : open && i === 2
-                        ? "rotate(-45deg) translate(5px,-5px)"
-                        : "none",
-                  }}
-                />
-              ))}
-            </span>
-          </button>
-        </div>
-      </div>
+              Get a Quote
+            </a>
 
-      {/* Mobile dropdown */}
+            {/* Quick Mobile Tap-to-Call Button */}
+            <a
+              href="tel:+639063665473"
+              aria-label="Call FRO Solar directly"
+              className="mobile-call-btn"
+              style={{
+                width: 42,
+                height: 42,
+                borderRadius: "9999px",
+                background: "rgba(141,198,63,0.18)",
+                border: "1px solid rgba(141,198,63,0.35)",
+                color: "var(--color-fro-green)",
+                transition: "all 0.2s ease",
+              }}
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </a>
+
+            {/* Accessible Hamburger Toggle */}
+            <button
+              id="mobile-menu-toggle"
+              onClick={() => setOpen(!open)}
+              className="mobile-nav-toggle"
+              aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={open}
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: 8,
+                background: open ? "rgba(255,255,255,0.08)" : "transparent",
+                border: open ? "1px solid rgba(255,255,255,0.15)" : "none",
+                cursor: "pointer",
+              }}
+            >
+              <span
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: open ? 0 : 5,
+                  width: 22,
+                }}
+              >
+                {[0, 1, 2].map((i) => (
+                  <span
+                    key={i}
+                    style={{
+                      display: "block",
+                      height: 2,
+                      background: "#fff",
+                      borderRadius: 2,
+                      width: i === 1 ? 16 : 22,
+                      transition: "all 0.2s ease",
+                      opacity: open && i === 1 ? 0 : 1,
+                      transform:
+                        open && i === 0
+                          ? "rotate(45deg) translate(5px,5px)"
+                          : open && i === 2
+                          ? "rotate(-45deg) translate(5px,-5px)"
+                          : "none",
+                    }}
+                  />
+                ))}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile dropdown menu */}
+        {open && (
+          <div
+            className="lg:hidden absolute top-full left-0 right-0"
+            style={{
+              background: "rgba(7,31,30,0.98)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              borderTop: "1px solid rgba(141,198,63,0.15)",
+              borderBottom: "1px solid rgba(141,198,63,0.15)",
+              boxShadow: "0 16px 40px rgba(0,0,0,0.6)",
+              maxHeight: "calc(100dvh - 72px)",
+              overflowY: "auto",
+            }}
+          >
+            <div className="fro-container py-4 flex flex-col gap-1">
+              <ul style={{ listStyle: "none", padding: 0, margin: 0 }} role="list">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        fontFamily: "var(--font-display)",
+                        fontWeight: 600,
+                        color: "rgba(255,255,255,0.9)",
+                        padding: "0.875rem 0.5rem",
+                        borderBottom: "1px solid rgba(255,255,255,0.06)",
+                        fontSize: "1rem",
+                        minHeight: 44,
+                      }}
+                    >
+                      <span>{link.label}</span>
+                      <span style={{ color: "var(--color-fro-green)", fontSize: "0.875rem" }}>→</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Mobile Quick Action Buttons in Drawer */}
+              <div className="pt-3 pb-2 flex flex-col gap-2.5">
+                <a
+                  href="#contact"
+                  className="btn-primary w-full justify-center"
+                  onClick={() => setOpen(false)}
+                >
+                  Get a Free Quote
+                </a>
+                <a
+                  href="tel:+639063665473"
+                  className="btn-ghost w-full justify-center"
+                  style={{
+                    border: "1px solid rgba(141,198,63,0.35)",
+                    color: "#ffffff",
+                    fontSize: "0.875rem",
+                  }}
+                  onClick={() => setOpen(false)}
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="var(--color-fro-green)"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  Call 0906-366-5473
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Dimmed backdrop to dismiss drawer by tapping outside */}
       {open && (
         <div
-          className="lg:hidden absolute top-full left-0 right-0"
-          style={{
-            background: "rgba(7,31,30,0.98)",
-            backdropFilter: "blur(20px)",
-            borderTop: "1px solid rgba(141,198,63,0.12)",
-          }}
-        >
-          <ul
-            className="fro-container px-6 py-4 flex flex-col gap-1"
-            role="list"
-          >
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  style={{
-                    display: "block",
-                    fontFamily: "var(--font-display)",
-                    fontWeight: 500,
-                    color: "rgba(255,255,255,0.85)",
-                    padding: "0.75rem 0",
-                    borderBottom: "1px solid rgba(255,255,255,0.05)",
-                    fontSize: "0.9375rem",
-                  }}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-            <li className="pt-3">
-              <a
-                href="#contact"
-                className="btn-primary w-full justify-center"
-                onClick={() => setOpen(false)}
-              >
-                Get a Quote
-              </a>
-            </li>
-          </ul>
-        </div>
+          className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-xs"
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        />
       )}
-    </nav>
+    </>
   );
 }
