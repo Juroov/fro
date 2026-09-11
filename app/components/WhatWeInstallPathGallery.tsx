@@ -19,6 +19,7 @@ interface MetricItem {
 interface SolarPath {
   id: string;
   pathNumber: string;
+  shortTitle: string;
   title: string;
   subtitle: string;
   categoryTag: string;
@@ -40,6 +41,7 @@ const SOLAR_PATHS: SolarPath[] = [
   {
     id: "grid-tied",
     pathNumber: "01",
+    shortTitle: "Grid-Tied Solar",
     title: "Grid-Tied Solar Systems",
     subtitle: "Daytime Power Generation + Utility Net Metering",
     categoryTag: "Fastest ROI • Lowest Upfront",
@@ -70,6 +72,7 @@ const SOLAR_PATHS: SolarPath[] = [
   {
     id: "hybrid",
     pathNumber: "02",
+    shortTitle: "Hybrid Storage",
     title: "Hybrid + Battery Storage",
     subtitle: "Intelligent Power Routing with Seamless Blackout Resilience",
     categoryTag: "Zero Outages • 24/7 Autonomy",
@@ -100,6 +103,7 @@ const SOLAR_PATHS: SolarPath[] = [
   {
     id: "off-grid",
     pathNumber: "03",
+    shortTitle: "Off-Grid Solar",
     title: "Off-Grid Microgrid Systems",
     subtitle: "Complete Energy Sovereignty for Locations Beyond the Grid",
     categoryTag: "100% Autonomous • Zero Utility Bills",
@@ -130,6 +134,7 @@ const SOLAR_PATHS: SolarPath[] = [
   {
     id: "electrical-civil",
     pathNumber: "04",
+    shortTitle: "Turnkey EPC",
     title: "Turnkey Electrical & Civil Works",
     subtitle: "Substructure Engineering, Protection Panels & Grid Compliance",
     categoryTag: "TESDA NC II Certified • Full EPC",
@@ -203,9 +208,7 @@ export default function WhatWeInstallPathGallery() {
                   <div className="fro-path-node-dot" />
                 </div>
                 <div className="fro-path-node-text">
-                  <span className="fro-path-node-title">
-                    {path.title.split(" ")[0]} {path.title.split(" ")[1]}
-                  </span>
+                  <span className="fro-path-node-title">{path.shortTitle}</span>
                   <span className="fro-path-node-tag">{path.capacityRange}</span>
                 </div>
                 {isActive && (
@@ -322,7 +325,10 @@ export default function WhatWeInstallPathGallery() {
                     <div className="fro-schematic-node-top">
                       <span className="fro-schematic-step">{flow.step}</span>
                       {fIdx < activePath.powerFlow.length - 1 && (
-                        <span className="fro-schematic-arrow" aria-hidden="true">→</span>
+                        <span className="fro-schematic-arrow" aria-hidden="true">
+                          <span className="fro-arrow-desktop">→</span>
+                          <span className="fro-arrow-mobile">{fIdx === 1 ? "↓" : "→"}</span>
+                        </span>
                       )}
                     </div>
                     <strong className="fro-schematic-label">{flow.label}</strong>
