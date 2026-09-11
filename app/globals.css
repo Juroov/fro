@@ -94,18 +94,21 @@ a {
    Section Layout Utilities
 ───────────────────────────────────────────── */
 .fro-section {
-  padding: 4.5rem 1rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
 }
 
 @media (min-width: 640px) {
   .fro-section {
-    padding: 5.5rem 1.5rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .fro-section {
-    padding: 7rem 2rem;
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
   }
 }
 
@@ -575,47 +578,39 @@ a {
    3D Walkthrough Feature Banner
 ───────────────────────────────────────────── */
 .fro-feature-banner {
-  margin-top: 3.5rem;
-  padding: 1.75rem 1.25rem;
-  background: var(--color-fro-teal);
+  margin-top: 2rem;
+  padding: 1.35rem 1.125rem;
+  background: linear-gradient(135deg, #071F1E 0%, #0E4B48 60%, #135E5B 100%);
+  border: 1px solid rgba(141, 198, 63, 0.22);
   border-radius: var(--radius-card);
-  box-shadow: 0 16px 40px rgba(14,75,72,0.14);
+  box-shadow: 0 16px 40px rgba(7, 31, 30, 0.25);
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (min-width: 640px) {
   .fro-feature-banner {
-    padding: 2.25rem 2rem;
+    margin-top: 3rem;
+    padding: 1.85rem 2rem;
+    border-radius: calc(var(--radius-card) + 4px);
+    gap: 1.5rem;
   }
 }
 
 @media (min-width: 920px) {
   .fro-feature-banner {
+    margin-top: 3.5rem;
     flex-direction: row;
     align-items: center;
     padding: 2.25rem 2.75rem;
     gap: 2.5rem;
   }
-}
-
-.fro-feature-banner {
-  margin-top: 3.5rem;
-  background: linear-gradient(135deg, #071F1E 0%, #0E4B48 60%, #135E5B 100%);
-  border: 1px solid rgba(141, 198, 63, 0.22);
-  border-radius: calc(var(--radius-card) + 4px);
-  padding: 2.25rem 2.75rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.75rem;
-  box-shadow: 0 20px 50px rgba(7, 31, 30, 0.25);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fro-feature-banner:hover {
@@ -818,15 +813,15 @@ a {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   background: var(--color-fro-surface);
   border: 1px solid var(--color-fro-border);
   border-radius: var(--radius-card);
-  padding: 0.625rem 0.75rem;
+  padding: 0.55rem 0.625rem;
   text-align: left;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  min-height: 54px;
+  min-height: 52px;
   width: 100%;
 }
 
@@ -866,8 +861,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 8px;
   background: rgba(14, 75, 72, 0.08);
   color: var(--color-fro-teal);
@@ -922,12 +917,11 @@ a {
 .fro-path-node-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.8125rem;
+  font-size: clamp(0.75rem, 2.8vw, 0.84rem);
   color: var(--color-fro-teal-dark);
-  line-height: 1.2;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.18;
+  white-space: normal;
+  word-break: break-word;
   transition: color 0.2s ease;
 }
 
@@ -935,6 +929,10 @@ a {
   .fro-path-node-title {
     font-size: 0.9375rem;
     line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: normal;
   }
 }
 
@@ -943,7 +941,7 @@ a {
 }
 
 .fro-path-node-tag {
-  font-size: 0.625rem;
+  font-size: clamp(0.5625rem, 2vw, 0.6875rem);
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--color-fro-ink-muted);

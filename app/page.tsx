@@ -382,7 +382,7 @@ export default function HomePage() {
           {/* 3D Walkthrough Feature Banner */}
           <Reveal delay={0.2}>
             <div className="fro-feature-banner">
-              <div style={{ flex: 1, minWidth: 260 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
                 <h3 style={{ color: "#ffffff", marginBottom: "0.625rem", fontSize: "clamp(1.15rem, 2.2vw, 1.375rem)", lineHeight: 1.35, fontWeight: 700 }}>
                   Curious how solar panels are installed on your roof?
                 </h3>
