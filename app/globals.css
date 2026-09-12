@@ -1812,3 +1812,438 @@ a {
   }
 }
 
+/* ─────────────────────────────────────────────
+   Scroll Progress Bar
+───────────────────────────────────────────── */
+.fro-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-fro-green) 0%, #b4e14a 100%);
+  z-index: 100;
+  transform-origin: 0%;
+  box-shadow: 0 0 8px rgba(141, 198, 63, 0.6);
+}
+
+/* ─────────────────────────────────────────────
+   Mobile Floating CTA (FAB)
+───────────────────────────────────────────── */
+.fro-fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
+  right: 1.25rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, var(--color-fro-green) 0%, #7dbb34 100%);
+  color: #ffffff;
+  box-shadow:
+    0 8px 24px rgba(141, 198, 63, 0.45),
+    0 0 0 4px rgba(141, 198, 63, 0.18);
+  z-index: 48;
+  transition: box-shadow 0.22s ease, transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.fro-fab:hover {
+  box-shadow:
+    0 12px 32px rgba(141, 198, 63, 0.6),
+    0 0 0 6px rgba(141, 198, 63, 0.22);
+}
+
+@media (min-width: 1024px) {
+  .fro-fab {
+    display: none !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Animated Counter
+───────────────────────────────────────────── */
+.fro-counter-num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* ─────────────────────────────────────────────
+   Project Filter Tabs
+───────────────────────────────────────────── */
+.fro-tab-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
+.fro-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 36px;
+  white-space: nowrap;
+}
+
+.fro-tab-btn:hover {
+  border-color: rgba(141, 198, 63, 0.5);
+  color: #ffffff;
+  background: rgba(141, 198, 63, 0.12);
+}
+
+.fro-tab-btn.active {
+  background: rgba(141, 198, 63, 0.2);
+  border-color: var(--color-fro-green);
+  color: var(--color-fro-green);
+  box-shadow: 0 0 16px rgba(141, 198, 63, 0.25);
+}
+
+.fro-tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  min-width: 20px;
+  padding: 0.1rem 0.4rem;
+  line-height: 1;
+}
+
+.fro-tab-btn.active .fro-tab-count {
+  background: rgba(141, 198, 63, 0.3);
+}
+
+/* ─────────────────────────────────────────────
+   Section Transition Bridge (light → dark)
+───────────────────────────────────────────── */
+.fro-section-bridge {
+  height: 3.5rem;
+  background: linear-gradient(
+    to bottom,
+    var(--color-fro-surface) 0%,
+    var(--color-fro-teal-dark) 100%
+  );
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────
+   Mobile Layout Improvements
+───────────────────────────────────────────── */
+
+/* 3-pillar solar intro — go to 3-col at 900px instead of 768px to avoid compression */
+@media (min-width: 768px) and (max-width: 899px) {
+  .fro-solar-intro-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+@media (min-width: 900px) {
+  .fro-solar-intro-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.75rem;
+  }
+}
+
+/* Specs strip — add top border on each 2-col item in mobile for visual separation */
+@media (max-width: 767px) {
+  .fro-specs-strip {
+    gap: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    margin-top: 2.5rem;
+  }
+
+  .fro-specs-item {
+    padding: 1.125rem 0.875rem;
+    border-radius: 0;
+    border-top: 1px solid var(--color-fro-border);
+  }
+
+  .fro-specs-item:nth-child(odd) {
+    border-right: 1px solid var(--color-fro-border);
+  }
+}
+
+/* Projects grid — explicit 2-col on mobile */
+@media (max-width: 479px) {
+  .fro-projects-grid-inner {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
+
+/* Contact links — stack vertically on small mobile */
+.fro-contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 2.75rem;
+}
+
+@media (max-width: 479px) {
+  .fro-contact-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+  }
+}
+
+/* Footer text — improved wrapping */
+.fro-footer-text {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 100%;
+  margin: 0 auto;
+  letter-spacing: 0.01em;
+  line-height: 1.7;
+}
+
+@media (max-width: 639px) {
+  .fro-footer-text {
+    font-size: 0.6875rem;
+    line-height: 1.8;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Solar Intro Animation — Overlay & Layout
+───────────────────────────────────────────── */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #071F1E;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+}
+
+.intro-dotgrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(141,198,63,0.1) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.intro-ambient-glow {
+  position: absolute;
+  bottom: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(141,198,63,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.intro-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-logo {
+  height: clamp(40px, 7vw, 58px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 12px rgba(141,198,63,0.3));
+}
+
+.intro-tagline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.875rem, 2.2vw, 1.0625rem);
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 0.01em;
+  margin: 0;
+  max-width: 100%;
+}
+
+.intro-sub {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.38);
+  margin: 0.25rem 0 0;
+  max-width: 100%;
+}
+
+.intro-progress-track {
+  width: clamp(160px, 50vw, 220px);
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 0.25rem;
+}
+
+.intro-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-fro-green), #b4e14a);
+  transform-origin: 0%;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(141, 198, 63, 0.6);
+}
+
+.intro-skip-btn {
+  position: absolute;
+  bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem));
+  right: 1.25rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 0.875rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.intro-skip-btn:hover {
+  color: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ─────────────────────────────────────────────
+   Solar Intro Animation — SVG Keyframes
+───────────────────────────────────────────── */
+
+/* Sun core — scale in with a slight overshoot */
+@keyframes intro-sun-in {
+  0%   { opacity: 0; transform: scale(0.5); }
+  70%  { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Sun aura — slow pulsing halo */
+@keyframes intro-aura-pulse {
+  0%, 100% { opacity: 0.12; transform: scale(0.92); }
+  50%       { opacity: 0.28; transform: scale(1.08); }
+}
+
+/* Rays — draw from tip inward */
+@keyframes intro-ray-draw {
+  from { stroke-dashoffset: 14; opacity: 0; }
+  to   { stroke-dashoffset: 0;  opacity: 1; }
+}
+
+/* Panel charge — green glow pulses in, then settles */
+@keyframes intro-panel-charge {
+  0%   { opacity: 0; }
+  35%  { opacity: 1; }
+  65%  { opacity: 0.7; }
+  100% { opacity: 0.35; }
+}
+
+/* Panel indicator dot — pop in */
+@keyframes intro-dot-pop {
+  0%   { opacity: 0; transform: scale(0); }
+  60%  { opacity: 1; transform: scale(1.4); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Power dashed line — draw down */
+@keyframes intro-power-draw {
+  from { opacity: 0; stroke-dashoffset: 30; }
+  to   { opacity: 0.55; stroke-dashoffset: 0; }
+}
+
+/* Mount bars / ground line — fade in */
+@keyframes intro-mount-fade {
+  from { opacity: 0; }
+  to   { opacity: 0.55; }
+}
+
+/* GENERATING text — fade in */
+@keyframes intro-energy-fade {
+  from { opacity: 0; }
+  to   { opacity: 0.75; }
+}
+
+/* ── Apply animations ── */
+.intro-sun-core {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: intro-sun-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.intro-sun-aura {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: intro-aura-pulse 2s ease-in-out 0.4s infinite;
+}
+
+.intro-ray {
+  animation: intro-ray-draw 0.35s ease-out both;
+  /* Each ray has its own animation-delay set inline */
+}
+
+.intro-panel-charge {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: intro-panel-charge 1.2s ease-out both;
+}
+
+.intro-panel-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: intro-dot-pop 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.intro-power-line {
+  stroke-dasharray: 5 3;
+  animation: intro-power-draw 0.5s ease-out 0.75s both;
+}
+
+.intro-mount {
+  animation: intro-mount-fade 0.4s ease-out 0.6s both;
+}
+
+.intro-energy-text {
+  animation: intro-energy-fade 0.4s ease-out 1.1s both;
+}
+
+/* ── Reduced motion: no keyframe animations ── */
+@media (prefers-reduced-motion: reduce) {
+  .intro-sun-core,
+  .intro-sun-aura,
+  .intro-ray,
+  .intro-panel-charge,
+  .intro-panel-dot,
+  .intro-power-line,
+  .intro-mount,
+  .intro-energy-text {
+    animation: none !important;
+    opacity: 1 !important;
+    stroke-dashoffset: 0 !important;
+  }
+}

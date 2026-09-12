@@ -256,95 +256,109 @@ export default function Navbar() {
         </div>
 
         {/* Mobile dropdown menu */}
-        {open && (
-          <div
-            className="lg:hidden absolute top-full left-0 right-0"
-            style={{
-              background: "rgba(7,31,30,0.98)",
-              backdropFilter: "blur(24px)",
-              WebkitBackdropFilter: "blur(24px)",
-              borderTop: "1px solid rgba(141,198,63,0.15)",
-              borderBottom: "1px solid rgba(141,198,63,0.15)",
-              boxShadow: "0 16px 40px rgba(0,0,0,0.6)",
-              maxHeight: "calc(100dvh - 72px)",
-              overflowY: "auto",
-            }}
-          >
-            <div className="fro-container py-4 flex flex-col gap-1">
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }} role="list">
-                {navLinks.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        fontFamily: "var(--font-display)",
-                        fontWeight: 600,
-                        color: "rgba(255,255,255,0.9)",
-                        padding: "0.875rem 0.5rem",
-                        borderBottom: "1px solid rgba(255,255,255,0.06)",
-                        fontSize: "1rem",
-                        minHeight: 44,
-                      }}
-                    >
-                      <span>{link.label}</span>
-                      <span style={{ color: "var(--color-fro-green)", fontSize: "0.875rem" }}>→</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              key="mobile-menu"
+              className="lg:hidden absolute top-full left-0 right-0"
+              initial={shouldReduceMotion ? {} : { opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={shouldReduceMotion ? {} : { opacity: 0, y: -8 }}
+              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              style={{
+                background: "rgba(7,31,30,0.98)",
+                backdropFilter: "blur(24px)",
+                WebkitBackdropFilter: "blur(24px)",
+                borderTop: "1px solid rgba(141,198,63,0.15)",
+                borderBottom: "1px solid rgba(141,198,63,0.15)",
+                boxShadow: "0 16px 40px rgba(0,0,0,0.6)",
+                maxHeight: "calc(100dvh - 72px)",
+                overflowY: "auto",
+              }}
+            >
+              <div className="fro-container py-4 flex flex-col gap-1">
+                <ul style={{ listStyle: "none", padding: 0, margin: 0 }} role="list">
+                  {navLinks.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          fontFamily: "var(--font-display)",
+                          fontWeight: 600,
+                          color: "rgba(255,255,255,0.9)",
+                          padding: "0.875rem 0.5rem",
+                          borderBottom: "1px solid rgba(255,255,255,0.06)",
+                          fontSize: "1rem",
+                          minHeight: 44,
+                        }}
+                      >
+                        <span>{link.label}</span>
+                        <span style={{ color: "var(--color-fro-green)", fontSize: "0.875rem" }}>→</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
 
-              {/* Mobile Quick Action Buttons in Drawer */}
-              <div className="pt-3 pb-2 flex flex-col gap-2.5">
-                <a
-                  href="#contact"
-                  className="btn-primary w-full justify-center"
-                  onClick={() => setOpen(false)}
-                >
-                  Get a Free Quote
-                </a>
-                <a
-                  href="tel:+639063665473"
-                  className="btn-ghost w-full justify-center"
-                  style={{
-                    border: "1px solid rgba(141,198,63,0.35)",
-                    color: "#ffffff",
-                    fontSize: "0.875rem",
-                  }}
-                  onClick={() => setOpen(false)}
-                >
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--color-fro-green)"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
+                {/* Mobile Quick Action Buttons in Drawer */}
+                <div className="pt-3 pb-2 flex flex-col gap-2.5">
+                  <a
+                    href="#contact"
+                    className="btn-primary w-full justify-center"
+                    onClick={() => setOpen(false)}
                   >
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
-                  Call 0906-366-5473
-                </a>
+                    Get a Free Quote
+                  </a>
+                  <a
+                    href="tel:+639063665473"
+                    className="btn-ghost w-full justify-center"
+                    style={{
+                      border: "1px solid rgba(141,198,63,0.35)",
+                      color: "#ffffff",
+                      fontSize: "0.875rem",
+                    }}
+                    onClick={() => setOpen(false)}
+                  >
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="var(--color-fro-green)"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    Call 0906-366-5473
+                  </a>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Dimmed backdrop to dismiss drawer by tapping outside */}
-      {open && (
-        <div
-          className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-xs"
-          onClick={() => setOpen(false)}
-          aria-hidden="true"
-        />
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-backdrop"
+            className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-xs"
+            initial={shouldReduceMotion ? {} : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={shouldReduceMotion ? {} : { opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

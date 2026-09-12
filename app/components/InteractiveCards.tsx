@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 
 type IconName = "phone" | "email" | "map";
 
@@ -143,6 +143,176 @@ export function Reveal({ children, delay = 0, className }: RevealProps) {
     >
       {children}
     </motion.div>
+  );
+}
+
+/* ─── AnimatedStat ────────────────────────────────────────────────── */
+interface AnimatedStatProps {
+  number: string; // e.g. "28", "175", "10+"
+  unit?: string;  // e.g. "Yrs", "MW", "Countries"
+  label: string;
+}
+
+export function AnimatedStat({ number, unit, label }: AnimatedStatProps) {
+  const reduce = useReducedMotion();
+  const [displayed, setDisplayed] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  // Parse numeric portion from strings like "10+", "175", "28", "7"
+  const hasPlus = number.endsWith("+");
+  const numericValue = parseInt(number.replace("+", ""), 10);
+
+  // Count-up via requestAnimationFrame when in view
+  const handleViewEnter = () => {
+    if (started || reduce) {
+      setDisplayed(numericValue);
+      return;
+    }
+    setStarted(true);
+    const duration = 1400;
+    const startTime = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplayed(Math.round(eased * numericValue));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  return (
+    <motion.div
+      className="hero-stat-cell"
+      onViewportEnter={handleViewEnter}
+      viewport={{ once: true, amount: 0.6 }}
+    >
+      <dt>
+        <span
+          className="fro-counter-num"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 800,
+            fontSize: "clamp(1.75rem, 3.8vw, 3rem)",
+            color: "#fff",
+            lineHeight: 1,
+            display: "block",
+            letterSpacing: "-0.04em",
+          }}
+        >
+          {displayed}
+          {hasPlus && "+"}
+          {unit && (
+            <span style={{ color: "var(--color-fro-green)", fontSize: "0.52em", letterSpacing: 0 }}>
+              {" "}{unit}
+            </span>
+          )}
+        </span>
+      </dt>
+      <dd
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize: "0.8125rem",
+          color: "rgba(255,255,255,0.68)",
+          marginTop: "0.375rem",
+          letterSpacing: "0.01em",
+          lineHeight: 1.4,
+        }}
+      >
+        {label}
+      </dd>
+    </motion.div>
+  );
+}
+
+/* ─── ProjectFilterTabs ───────────────────────────────────────────── */
+type FilterCategory = "All" | "Grid-Tied" | "Hybrid" | "Off-Grid";
+
+const FILTER_LABELS: FilterCategory[] = ["All", "Grid-Tied", "Hybrid", "Off-Grid"];
+
+interface ProjectForFilter {
+  name: string;
+  type: string;
+  capacity: string;
+  iconName: string;
+}
+
+interface ProjectFilterTabsProps {
+  projects: ProjectForFilter[];
+}
+
+export function ProjectFilterTabs({ projects }: ProjectFilterTabsProps) {
+  const [active, setActive] = useState<FilterCategory>("All");
+
+  const filtered = projects.filter((p) => {
+    if (active === "All") return true;
+    if (active === "Grid-Tied") return p.type.toLowerCase().includes("grid-tied");
+    if (active === "Off-Grid") return p.type.toLowerCase().includes("off-grid");
+    if (active === "Hybrid") return p.type.toLowerCase().includes("hybrid");
+    return true;
+  });
+
+  return (
+    <div>
+      {/* Tab bar */}
+      <div className="fro-tab-filter" role="tablist" aria-label="Filter installations by system type">
+        {FILTER_LABELS.map((cat) => (
+          <button
+            key={cat}
+            role="tab"
+            aria-selected={active === cat}
+            onClick={() => setActive(cat)}
+            className={`fro-tab-btn${active === cat ? " active" : ""}`}
+          >
+            {cat}
+            {cat !== "All" && (
+              <span className="fro-tab-count">
+                {projects.filter((p) => {
+                  const t = p.type.toLowerCase();
+                  if (cat === "Grid-Tied") return t.includes("grid-tied");
+                  if (cat === "Off-Grid") return t.includes("off-grid");
+                  if (cat === "Hybrid") return t.includes("hybrid");
+                  return false;
+                }).length}
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Grid */}
+      <motion.div
+        layout
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 220px), 1fr))",
+          gap: "0.875rem",
+          marginTop: "1.5rem",
+        }}
+      >
+        <AnimatePresence mode="sync">
+          {filtered.map((p, i) => (
+            <motion.div
+              key={p.name}
+              layout
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.94 }}
+              transition={{ duration: 0.25, delay: i * 0.04 }}
+            >
+              <ProjectCard project={p} index={i} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      {filtered.length === 0 && (
+        <p style={{ color: "rgba(255,255,255,0.45)", textAlign: "center", padding: "2rem 0", fontSize: "0.9rem" }}>
+          No installations in this category yet.
+        </p>
+      )}
+    </div>
   );
 }
 

@@ -410,7 +410,7 @@ export function SolarProcessModal({
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.875rem" }}>
           <Image
-            src="/fro-logo.png"
+            src="/fro-logo-transparent.png"
             alt="FRO Solar Logo"
             width={120}
             height={42}

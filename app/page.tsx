@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Navbar from "./components/Navbar";
-import { ProjectCard, ContactLink, Reveal } from "./components/InteractiveCards";
+import { ContactLink, Reveal, AnimatedStat, ProjectFilterTabs } from "./components/InteractiveCards";
 import HowItWorksTrigger from "./components/SolarProcessModal";
 import WhatWeInstallPathGallery from "./components/WhatWeInstallPathGallery";
+import ScrollProgress from "./components/ScrollProgress";
+import FloatingCTA from "./components/FloatingCTA";
+import SolarIntroAnimation from "./components/SolarIntroAnimation";
 
 const stats = [
   { number: "28", unit: "Yrs", label: "Industry experience" },
@@ -34,6 +37,9 @@ const certifications = [
 export default function HomePage() {
   return (
     <>
+      <SolarIntroAnimation />
+      <ScrollProgress />
+      <FloatingCTA />
       <Navbar />
 
       {/* HERO */}
@@ -157,40 +163,7 @@ export default function HomePage() {
           <div className="fro-container">
             <dl className="hero-stats-grid">
               {stats.map((s) => (
-                <div key={s.label} className="hero-stat-cell">
-                  <dt>
-                    <span
-                      style={{
-                        fontFamily: "var(--font-display)",
-                        fontWeight: 800,
-                        fontSize: "clamp(1.75rem, 3.8vw, 3rem)",
-                        color: "#fff",
-                        lineHeight: 1,
-                        display: "block",
-                        letterSpacing: "-0.04em",
-                      }}
-                    >
-                      {s.number}
-                      {s.unit && (
-                        <span style={{ color: "var(--color-fro-green)", fontSize: "0.52em", letterSpacing: 0 }}>
-                          {" "}{s.unit}
-                        </span>
-                      )}
-                    </span>
-                  </dt>
-                  <dd
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: "0.8125rem",
-                      color: "rgba(255,255,255,0.68)",
-                      marginTop: "0.375rem",
-                      letterSpacing: "0.01em",
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    {s.label}
-                  </dd>
-                </div>
+                <AnimatedStat key={s.label} number={s.number} unit={s.unit} label={s.label} />
               ))}
             </dl>
           </div>
@@ -203,9 +176,6 @@ export default function HomePage() {
           <Reveal>
             <div style={{ marginBottom: "clamp(2.25rem, 5vw, 3.5rem)", maxWidth: 640 }}>
               <div className="fro-accent-line" style={{ marginBottom: "1.25rem" }} aria-hidden="true" />
-              <span style={{ color: "var(--color-fro-green-dark)", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.75rem", letterSpacing: "0.08em", textTransform: "uppercase", display: "block", marginBottom: "0.5rem" }}>
-                Solar Energy Fundamentals
-              </span>
               <h2 style={{ marginBottom: "0.875rem" }}>How Solar Panels Power Your Life</h2>
               <p>Convert abundant Philippine sunshine into free, reliable electricity. Built with Tier-1 monocrystalline cells engineered for high tropical heat, heavy rain, and coastal weather.</p>
             </div>
@@ -404,7 +374,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <Reveal>
               <div
-                className="rounded-2xl sm:rounded-3xl overflow-hidden min-h-[260px] sm:min-h-[340px] md:min-h-[420px] lg:min-h-[460px] w-full"
+                className="rounded-2xl sm:rounded-3xl overflow-hidden min-h-[320px] sm:min-h-[380px] md:min-h-[440px] lg:min-h-[480px] w-full"
                 style={{
                   background: "url('/solar-engineer.jpg') center/cover no-repeat",
                   boxShadow: "0 24px 60px rgba(14,75,72,0.12)",
@@ -445,8 +415,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Section Bridge: smooth transition into dark Projects */}
+      <div className="fro-section-bridge" aria-hidden="true" />
+
       {/* PROJECTS */}
-      <section id="projects" aria-label="Completed solar installations" className="fro-section fro-dot-grid" style={{ background: "var(--color-fro-teal)" }}>
+      <section id="projects" aria-label="Completed solar installations" className="fro-section fro-dot-grid" style={{ background: "var(--color-fro-teal)", paddingTop: "clamp(3rem, 5vw, 4.5rem)" }}>
         <div className="fro-container">
           <Reveal>
             <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem", marginBottom: "clamp(1.75rem, 4vw, 3rem)" }}>
@@ -456,11 +429,7 @@ export default function HomePage() {
               </div>
             </div>
           </Reveal>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 240px), 1fr))", gap: "0.875rem" }}>
-            {projects.map((p, i) => (
-              <ProjectCard key={p.name} project={p} index={i} />
-            ))}
-          </div>
+          <ProjectFilterTabs projects={projects} />
         </div>
       </section>
 
@@ -494,7 +463,7 @@ export default function HomePage() {
         <div aria-hidden="true" style={{ position: "absolute", bottom: -200, left: "50%", transform: "translateX(-50%)", width: 800, height: 600, background: "radial-gradient(ellipse, rgba(141,198,63,0.12) 0%, transparent 70%)", pointerEvents: "none" }} />
         <div className="fro-section fro-container" style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
           <div style={{ display: "flex", justifyContent: "center", marginBottom: "1.75rem" }}>
-            <Image src="/fro-logo.png" alt="FRO Solar Energy Solution" width={240} height={80} style={{ height: "clamp(55px, 9vw, 80px)", width: "auto", objectFit: "contain", filter: "brightness(1.1)" }} />
+            <Image src="/fro-logo-transparent.png" alt="FRO Solar Energy Solution" width={240} height={80} style={{ height: "clamp(55px, 9vw, 80px)", width: "auto", objectFit: "contain", filter: "brightness(1.1)" }} />
           </div>
           <h2 style={{ color: "#fff", fontSize: "clamp(1.85rem, 4.5vw, 3.25rem)", marginBottom: "1rem", letterSpacing: "-0.03em" }}>Ready to Go Solar?</h2>
           <p style={{ color: "rgba(255,255,255,0.72)", fontSize: "clamp(0.95rem, 2vw, 1.0625rem)", margin: "0 auto 2.5rem", maxWidth: "46ch", lineHeight: 1.65 }}>
@@ -516,24 +485,14 @@ export default function HomePage() {
               Email Us
             </a>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "1.25rem 2rem",
-              borderTop: "1px solid rgba(255, 255, 255, 0.12)",
-              paddingTop: "2.75rem",
-            }}
-          >
+          <div className="fro-contact-links">
             <ContactLink href="tel:+639063665473" iconName="phone" text="082-272-0011 / 0906-366-5473" />
             <ContactLink href="mailto:frosolar.energysolutions@gmail.com" iconName="email" text="frosolar.energysolutions@gmail.com" />
             <ContactLink href="https://maps.google.com/?q=Sta.+Ana+Road,+Tiguman,+Digos+City,+Davao+del+Sur" iconName="map" text="Sta. Ana Road, Digos City" />
           </div>
         </div>
         <footer style={{ background: "var(--color-fro-teal-dark)", padding: "1.5rem 1.25rem max(1.5rem, env(safe-area-inset-bottom, 1.5rem))", textAlign: "center", position: "relative", zIndex: 1, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", color: "rgba(255,255,255,0.45)", maxWidth: "100%", margin: "0 auto", letterSpacing: "0.01em", lineHeight: 1.7 }}>
+          <p className="fro-footer-text">
             Fro Solar Power Installation Services &mdash; Purok Cattleya, Sta. Ana Road, Tiguman, Digos City, Davao del Sur &bull; DTI Reg. No. 5981531 &bull; {new Date().getFullYear()}
           </p>
         </footer>
