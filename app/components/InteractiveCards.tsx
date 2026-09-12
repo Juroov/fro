@@ -104,23 +104,25 @@ export function ContactLink({ href, iconName, text }: ContactLinkProps) {
         alignItems: "center",
         gap: "0.625rem",
         fontFamily: "var(--font-body)",
-        fontSize: "0.875rem",
+        fontSize: "clamp(0.75rem, 3.2vw, 0.875rem)",
         color: hovered ? "#fff" : "rgba(255,255,255,0.78)",
         textDecoration: "none",
         transition: "all 0.24s cubic-bezier(0.16, 1, 0.3, 1)",
         minHeight: 44,
-        padding: "0.5rem 1rem",
+        padding: "0.5rem 0.875rem",
         borderRadius: 9999,
         background: hovered ? "rgba(141,198,63,0.18)" : "rgba(255,255,255,0.04)",
         border: hovered ? "1px solid rgba(141,198,63,0.5)" : "1px solid rgba(255,255,255,0.1)",
         transform: hovered ? "translateY(-2px)" : "translateY(0px)",
         boxShadow: hovered ? "0 8px 22px rgba(7,31,30,0.4), 0 0 14px rgba(141,198,63,0.25)" : "none",
+        maxWidth: "100%",
+        boxSizing: "border-box",
       }}
     >
-      <span style={{ transform: hovered ? "scale(1.15) rotate(-5deg)" : "scale(1)", transition: "transform 0.22s ease", display: "inline-flex" }}>
+      <span style={{ transform: hovered ? "scale(1.15) rotate(-5deg)" : "scale(1)", transition: "transform 0.22s ease", display: "inline-flex", flexShrink: 0 }}>
         <ContactIcon name={iconName} />
       </span>
-      <span>{text}</span>
+      <span style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}>{text}</span>
     </a>
   );
 }

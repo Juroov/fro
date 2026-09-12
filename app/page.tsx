@@ -3,9 +3,7 @@ import Navbar from "./components/Navbar";
 import { ContactLink, Reveal, AnimatedStat, ProjectFilterTabs } from "./components/InteractiveCards";
 import HowItWorksTrigger from "./components/SolarProcessModal";
 import WhatWeInstallPathGallery from "./components/WhatWeInstallPathGallery";
-import ScrollProgress from "./components/ScrollProgress";
 import FloatingCTA from "./components/FloatingCTA";
-import SolarIntroAnimation from "./components/SolarIntroAnimation";
 
 const stats = [
   { number: "28", unit: "Yrs", label: "Industry experience" },
@@ -37,8 +35,6 @@ const certifications = [
 export default function HomePage() {
   return (
     <>
-      <SolarIntroAnimation />
-      <ScrollProgress />
       <FloatingCTA />
       <Navbar />
 
@@ -49,6 +45,8 @@ export default function HomePage() {
         style={{
           position: "relative",
           minHeight: "100dvh",
+          maxWidth: "100%",
+          overflowX: "clip",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -78,17 +76,21 @@ export default function HomePage() {
                 padding: "0.35rem 0.85rem",
                 marginBottom: "1.25rem",
                 backdropFilter: "blur(8px)",
+                maxWidth: "100%",
+                boxSizing: "border-box",
               }}
             >
-              <span style={{ color: "var(--color-fro-green)", fontSize: "0.75rem" }}>✦</span>
+              <span style={{ color: "var(--color-fro-green)", fontSize: "0.75rem", flexShrink: 0 }}>✦</span>
               <span
                 style={{
                   fontFamily: "var(--font-display)",
                   fontWeight: 700,
-                  fontSize: "0.75rem",
-                  letterSpacing: "0.06em",
+                  fontSize: "clamp(0.65rem, 2.7vw, 0.75rem)",
+                  letterSpacing: "0.05em",
                   color: "#ffffff",
                   textTransform: "uppercase",
+                  lineHeight: 1.35,
+                  wordBreak: "break-word",
                 }}
               >
                 Engineered Monocrystalline Solar &amp; Storage

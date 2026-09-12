@@ -16,10 +16,24 @@ export default function ScrollProgress() {
   }
 
   return (
-    <motion.div
-      className="fro-scroll-progress"
-      style={{ scaleX, transformOrigin: "0%" }}
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 3,
+        overflow: "hidden",
+        zIndex: 100,
+        pointerEvents: "none",
+        maxWidth: "100vw",
+      }}
       aria-hidden="true"
-    />
+    >
+      <motion.div
+        className="fro-scroll-progress"
+        style={{ scaleX, transformOrigin: "0%", width: "100%", height: "100%" }}
+      />
+    </div>
   );
 }
