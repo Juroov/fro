@@ -4,6 +4,7 @@ import { ContactLink, Reveal, AnimatedStat, ProjectFilterTabs } from "./componen
 import HowItWorksTrigger from "./components/SolarProcessModal";
 import WhatWeInstallPathGallery from "./components/WhatWeInstallPathGallery";
 import FloatingCTA from "./components/FloatingCTA";
+import SolarIntroAnimation from "./components/IntroAnimationClient";
 
 const stats = [
   { number: "28", unit: "Yrs", label: "Industry experience" },
@@ -35,6 +36,8 @@ const certifications = [
 export default function HomePage() {
   return (
     <>
+      {/* Intro animation — overlays full screen, auto-exits after ~2.4 s */}
+      <SolarIntroAnimation />
       <FloatingCTA />
       <Navbar />
 
