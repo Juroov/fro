@@ -27,8 +27,9 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          gap: "0.75rem",
-          marginBottom: "0.75rem",
+          gap: "0.5rem",
+          marginBottom: "0.625rem",
+          flexWrap: "wrap",
         }}
       >
         <h3
@@ -39,12 +40,15 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             fontFamily: "var(--font-display)",
             lineHeight: 1.35,
             letterSpacing: "-0.01em",
-            wordBreak: "break-word",
+            overflowWrap: "break-word",
+            wordBreak: "normal",
+            flex: "1 1 auto",
+            minWidth: 0,
           }}
         >
           {project.name}
         </h3>
-        <span className="fro-badge" style={{ flexShrink: 0, whiteSpace: "nowrap" }}>
+        <span className="fro-badge" style={{ flexShrink: 0, whiteSpace: "nowrap", alignSelf: "flex-start" }}>
           {project.capacity}
         </span>
       </div>
@@ -131,13 +135,15 @@ interface RevealProps {
   children: React.ReactNode;
   delay?: number;
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export function Reveal({ children, delay = 0, className }: RevealProps) {
+export function Reveal({ children, delay = 0, className, style }: RevealProps) {
   const reduce = useReducedMotion();
   return (
     <motion.div
       className={className}
+      style={style}
       initial={reduce ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.25 }}
@@ -288,8 +294,8 @@ export function ProjectFilterTabs({ projects }: ProjectFilterTabsProps) {
         layout
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 220px), 1fr))",
-          gap: "0.875rem",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 200px), 1fr))",
+          gap: "1rem",
           marginTop: "1.5rem",
         }}
       >

@@ -18,7 +18,7 @@ const START_Y = 116;
 // Sun position
 const SUN_CX = 150;
 const SUN_CY = 56;
-const SUN_R  = 24;
+const SUN_R = 24;
 
 // Precompute 8 ray endpoints
 const RAY_INNER = SUN_R + 7;
@@ -155,10 +155,10 @@ function SolarSVG() {
 
           {/* Cell grid — 3 cols × 2 rows */}
           {/* Vertical dividers */}
-          <line x1={x + PW / 3}     y1={y + 1} x2={x + PW / 3}     y2={y + PH - 1} stroke="#1A5F5B" strokeWidth="0.6" />
-          <line x1={x + (PW*2)/3}   y1={y + 1} x2={x + (PW*2)/3}   y2={y + PH - 1} stroke="#1A5F5B" strokeWidth="0.6" />
+          <line x1={x + PW / 3} y1={y + 1} x2={x + PW / 3} y2={y + PH - 1} stroke="#1A5F5B" strokeWidth="0.6" />
+          <line x1={x + (PW * 2) / 3} y1={y + 1} x2={x + (PW * 2) / 3} y2={y + PH - 1} stroke="#1A5F5B" strokeWidth="0.6" />
           {/* Horizontal divider */}
-          <line x1={x + 1} y1={y + PH/2} x2={x + PW - 1} y2={y + PH/2} stroke="#1A5F5B" strokeWidth="0.6" />
+          <line x1={x + 1} y1={y + PH / 2} x2={x + PW - 1} y2={y + PH / 2} stroke="#1A5F5B" strokeWidth="0.6" />
 
           {/* Reflection highlight */}
           <line
@@ -212,7 +212,7 @@ function SolarSVG() {
       />
 
       {/* ── Mounting legs ── */}
-      <line x1={START_X + 28}           y1={ARRAY_BOTTOM + 10} x2={START_X + 28}           y2={ARRAY_BOTTOM + 22} stroke="#1E6B66" strokeWidth="2" strokeLinecap="round" opacity="0.5" className="intro-mount" />
+      <line x1={START_X + 28} y1={ARRAY_BOTTOM + 10} x2={START_X + 28} y2={ARRAY_BOTTOM + 22} stroke="#1E6B66" strokeWidth="2" strokeLinecap="round" opacity="0.5" className="intro-mount" />
       <line x1={START_X + TOTAL_W - 28} y1={ARRAY_BOTTOM + 10} x2={START_X + TOTAL_W - 28} y2={ARRAY_BOTTOM + 22} stroke="#1E6B66" strokeWidth="2" strokeLinecap="round" opacity="0.5" className="intro-mount" />
 
       {/* ── Ground line ── */}
@@ -334,7 +334,7 @@ export default function SolarIntroAnimation() {
             transition={{ duration: 0.5, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
             style={{ textAlign: "center" }}
           >
-            <p className="intro-tagline">Powering Davao del Sur with the Sun</p>
+            <p className="intro-tagline">Powering Philippines with the Sun</p>
             <p className="intro-sub">FRO Solar Power Installation Services</p>
           </motion.div>
 

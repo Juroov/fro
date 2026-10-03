@@ -5,6 +5,7 @@ import HowItWorksTrigger from "./components/SolarProcessModal";
 import WhatWeInstallPathGallery from "./components/WhatWeInstallPathGallery";
 import FloatingCTA from "./components/FloatingCTA";
 import SolarIntroAnimation from "./components/IntroAnimationClient";
+import SolarEstimator from "./components/SolarEstimator";
 
 const stats = [
   { number: "28", unit: "Yrs", label: "Industry experience" },
@@ -189,9 +190,9 @@ export default function HomePage() {
           {/* 3 Pillars Grid */}
           <div className="fro-solar-intro-grid">
             {/* Pillar 1: Solar Generation */}
-            <Reveal delay={0.06}>
-              <div className="fro-solar-pillar-card" style={{ height: "100%" }}>
-                <div>
+            <Reveal delay={0.06} style={{ height: "100%" }}>
+              <div className="fro-solar-pillar-card">
+                <div style={{ flex: 1 }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem" }}>
                     <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(141,198,63,0.14)", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(141,198,63,0.25)" }}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-fro-green-dark)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -227,9 +228,9 @@ export default function HomePage() {
             </Reveal>
 
             {/* Pillar 2: Inverter & Storage */}
-            <Reveal delay={0.12}>
-              <div className="fro-solar-pillar-card" style={{ height: "100%" }}>
-                <div>
+            <Reveal delay={0.12} style={{ height: "100%" }}>
+              <div className="fro-solar-pillar-card">
+                <div style={{ flex: 1 }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem" }}>
                     <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(14,75,72,0.1)", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(14,75,72,0.18)" }}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-fro-teal)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -262,9 +263,9 @@ export default function HomePage() {
             </Reveal>
 
             {/* Pillar 3: Net Metering & Savings */}
-            <Reveal delay={0.18}>
-              <div className="fro-solar-pillar-card" style={{ height: "100%" }}>
-                <div>
+            <Reveal delay={0.18} style={{ height: "100%" }}>
+              <div className="fro-solar-pillar-card">
+                <div style={{ flex: 1 }}>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem" }}>
                     <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(247,148,29,0.12)", display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid rgba(247,148,29,0.25)" }}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-fro-orange)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -461,6 +462,11 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* SOLAR ESTIMATOR */}
+      <section id="estimator" aria-label="Solar system estimator" style={{ background: "var(--color-fro-off-white)" }}>
+        <SolarEstimator />
       </section>
 
       {/* CONTACT + FOOTER */}
