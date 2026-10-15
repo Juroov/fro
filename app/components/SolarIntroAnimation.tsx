@@ -266,14 +266,9 @@ export default function SolarIntroAnimation() {
 
   // Automatic exit timer — runs automatically without needing to tap
   useEffect(() => {
-    if (shouldReduce) {
-      setVisible(false);
-      return;
-    }
-
     const timer = setTimeout(() => {
       setVisible(false);
-    }, 2400);
+    }, shouldReduce ? 0 : 2400);
 
     return () => clearTimeout(timer);
   }, [shouldReduce]);

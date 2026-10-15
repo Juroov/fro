@@ -4,19 +4,18 @@
 
 | Route | Purpose | Status | Notes |
 |---|---|---|---|
-| `/` | Homepage (Hero, Stats, Services, 3D Installation Walkthrough, About, Projects, Certifications, Contact) | Ready | Fully styled, responsive, Next.js static prerender |
-| `/projects` | Dedicated Portfolio / Installations index | Ready | Grid of commercial, residential, and remote projects |
+| `/` | Homepage (Hero, Proof, Systems, Projects, About, Process, Estimator, Credentials, Contact) | Ready | Full responsive redesign, Next.js static prerender |
 | `/_not-found` | Custom 404 handler | Ready | Default Next.js prerendered 404 |
 
 ## Interactive Features & 3D Assets
 
 | Feature | Component | Status | Notes |
 |---|---|---|---|
-| 3D Solar Villa & Process Walkthrough | `SolarProcess3D.tsx`, `SolarProcessModal.tsx`, `RealisticSolarVilla.tsx` | Ready | 8 installation phases, non-overlapping annotations, glowing beacon pins, orbit controls & reset |
-| What We Install Path Gallery UI | `WhatWeInstallPathGallery.tsx` | Ready | 4-step energy conduit rail (01 Grid-Tied, 02 Hybrid, 03 Off-Grid, 04 Turnkey Electrical & Civil), animated power flow schematics, dual-pane showcase & real project credentials |
-| Interactive Cards & Animations | `InteractiveCards.tsx` | Ready | Motion / Framer Motion viewport reveal, reduced motion support |
-| Smooth Scrolling | `SmoothScrollProvider.tsx` | Ready | Lenis smooth scroll provider |
-| Navigation Header | `Navbar.tsx` | Ready | Liquid gliding glass indicator pill (`layoutId` spring physics), pill track, liquid phone capsule, brand aura, sticky backdrop blur, mobile drawer, direct call CTA |
+| Solar System Estimator | `SolarEstimator.tsx` | Ready | Responsive worksheet with bespoke appliance SVGs, category/search filters, live load summary, validated custom appliances, editable results, disclosed assumptions, and prefilled estimate email |
+| Navigation Header | `Navbar.tsx` | Ready | Lightweight sticky header, accessible mobile drawer, direct call and quote actions |
+| Mobile Action Bar | `FloatingCTA.tsx` | Ready | Safe-area-aware persistent Call and Get a Quote actions below 760px |
+| Legacy 3D Walkthrough | `SolarProcess3D.tsx`, `SolarProcessModal.tsx`, `RealisticSolarVilla.tsx` | Archived | Files retained but removed from the homepage critical path for mobile performance |
+| Legacy Intro and Path Gallery | `SolarIntroAnimation.tsx`, `WhatWeInstallPathGallery.tsx` | Archived | Files retained but no longer shipped on the homepage |
 
 ## Credential & Data Audit (vs. `company-facts.md`)
 
@@ -43,3 +42,5 @@
 - **2026-09-11 (Liquid Navbar Hover)**: Implemented an organic liquid hover system on the desktop navbar (`Navbar.tsx` & `globals.css`) with a sleek pill track container, Framer Motion shared layout spring indicator pill (`layoutId="fro-navbar-liquid-pill"`), specular glare highlight, core ambient glow, liquid glass phone action pill, brand aura, and reduced motion accommodation.
 - **2026-09-11 (What We Install Phone Responsiveness & Visual Parity)**: Re-engineered `WhatWeInstallPathGallery.tsx` and `globals.css` so that on mobile phones (320px–430px) the section possesses identical visual completeness and structure to desktop. Replaced cut-off horizontal scrolling rail with a balanced 2×2 mobile selector grid ensuring all 4 paths are visible at once, added `shortTitle` tokens to prevent string truncation, calibrated photo aspect ratio and compact floating badges, introduced 2×2 connected energy circuit arrows (`1 → 2 ↓ 3 → 4`), balanced the 2×2 metrics grid, and converted the assessment button to a full-width mobile CTA.
 - **2026-09-11 (Core Container Gutters & Feature Banner Phone Parity)**: Refactored `.fro-section` to vertical-only padding (`padding-top: 3.5rem; padding-bottom: 3.5rem;`) removing double horizontal gutter padding that robbed 32px of screen width on phones. Replaced fixed `minWidth: 260` with `minWidth: 0` in `app/page.tsx#L385` and eliminated a duplicate desktop-sized padding override (`2.25rem 2.75rem`) in `globals.css` on the 3D walkthrough feature banner, ensuring effortless edge-to-edge layout parity on all phones.
+- **2026-10-14 (Full UI/UX & Responsive Redesign)**: Rebuilt the homepage around a trust-first conversion flow: concise image-led hero, proof strip, responsive system cards, real project evidence, founder experience, four-step process, estimator, verified credentials, and direct contact. Replaced the blocking splash, smooth-scroll provider, 3D walkthrough, and dense path gallery in the critical path with server-rendered content and small client boundaries. Added a lightweight accessible mobile drawer, safe-area mobile action bar, Lucide icon system, 320px responsive rules, reduced-motion handling, corrected estimator contact data, and verified lint, TypeScript, and the Next.js production build.
+- **2026-10-14 (Estimator UI/UX)**: Replaced the cramped appliance grid with a responsive worksheet and selection summary, using bespoke appliance drawings and no emoji. Fixed custom appliance visibility/selection, unit counts, search trimming, reset, and result editing. Preserved sizing calculations and disclosed assumptions. Browser checks covered quantities, search/no-results, custom validation, three steps, email summary, reset, and 320px/390px/768px/1440px widths without overflow. TypeScript, targeted ESLint, calculation checks, and production build passed.

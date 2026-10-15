@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import SmoothScrollProvider from "./components/SmoothScrollProvider";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -44,10 +43,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en-PH"
       className={`${montserrat.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans">
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
-      </body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

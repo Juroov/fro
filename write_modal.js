@@ -1,1 +1,1 @@
-ok
+void "ok";
