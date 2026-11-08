@@ -67,3 +67,17 @@ plant background) but warm and locally grounded (family homes, local
 businesses, "empowering your home"). Avoid over-technical jargon on
 homepage/marketing copy — save kW/kWh specifics for the Projects and
 technical sections where credibility matters most.
+
+## Current homepage refinements — 8 Nov 2026
+
+Impeccable polish preserves the teal/green identity, Montserrat, existing facts, and project photography. Headings use 700 weight, restrained negative tracking (−0.025 to −0.035em), and wider measures; desktop display caps are 80px for H1 and 48px for H2. Supporting service text is 15px, fitting details 14px, and credential details 14px. The darker detail green is #47751B for text contrast on light surfaces.
+
+Use direct headings without repeated eyebrow labels. Reserve numbers for meaningful sequences such as installation steps. Projects use image-led layouts with open captions rather than outer card borders. Preserve the native expandable albums, accessible photo viewer, 4K access, and AI-enhancement labels. The homepage opens directly without the splash overlay. Keep the skip link, keyboard-contained mobile menu, inert background, and focus restoration.
+
+## React Bits interaction layer — 8 Nov 2026
+
+Use the adapted PillNav for desktop section navigation, SpotlightCard for service panels, and CountUp for the existing experience figures. Keep FRO palette tokens, a stable accessible number label, reduced-motion/static fallbacks, no ambient motion or grain, and the existing mobile drawer behavior. Keep all contact and image-viewing paths explicit. No new runtime dependencies are required. Source adaptations and license are documented in app/components/react-bits.
+
+### Page-specific React Bits behavior
+
+Service panels lead with project photographs in four desktop, two tablet, and one phone column. Their Plan this system controls carry the choice into Contact and the email draft; visitors can clear or change it. Keep the enquiry visibly contextual without adding a modal or mandatory form. Navigation uses the page's 12px outer and 8px inner corner language. Preserve static/reduced-motion fallbacks and source-photo quality.

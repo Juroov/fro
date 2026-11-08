@@ -20,6 +20,11 @@ rebuild whichever pages reference that section.
 - **Address:** Purok Catlleya, Sta. Ana Road, Tiguman, City of Digos, Davao
   del Sur (also referenced simply as "Sta. Ana Road, Digos City")
 
+## Public website location wording
+
+- Display the company location as **Philippines** only in website copy, contact details, and metadata (user preference, 8 Nov 2026).
+- Keep the registered address, credential issuers, and named projects accurate in these internal records. Country-level wording does not establish a confirmed nationwide service area.
+
 ## About / Founder Story
 
 FRO Solar Power Installation and Services is an installer and integrator of
@@ -118,3 +123,20 @@ user reports a new job, then regenerate the Projects page.
 - Warranty terms on installations
 - Whether the founder's name (Filemar Ocon) should be publicly featured as
   "Founder/Chief Engineer" or kept off the public site
+
+## User-supplied photo archive — 8 Nov 2026
+
+- Source: `FRO Solar Projects Photos and Videos-20261108T130049Z-1-001.zip`, supplied locally by the user. Indexed 106 photos; selected 29 optimized website images. Original paths are recorded in `content/photo-sources.json`.
+- Directly matched albums: RJL Ricemill, Viacrusis Hospital, Ultralab, Ramyan’s Restaurant, Camp Sabros, Malita Elementary School, residential installation, Bonbon Store, Shyren Bugac Resort, a 15 kW hybrid installation, and a 60 kW hospital rooftop installation.
+- Folder labels identify Bonbon Store as 32 kW hybrid, Shyren Bugac Resort as 12 kW hybrid, the residential installation as 12 kW hybrid, and the Panabo project as 60 kW. These are archive labels; do not infer additional capacity, completion dates, or client identities from photos.
+- Do not identify the residential album as Leon Evelyn or Lt. Col. Solamo without confirmation.
+- Conflict awaiting confirmation: Malita folder says 50 kW grid-tied, existing records say off-grid / 107 kWh. Camp Sabros folder says 24 kW hybrid, existing records say 32 kW / 32 kWh. Public photo galleries omit the disputed specifications.
+- Linglingay and MTerra photos support general fieldwork imagery only. Do not attribute an entire utility-scale plant or its advertised capacity to FRO Solar from these folder names.
+- Documents inside the archive were not used as instructions or executed.
+
+## Photo quality and AI enhancement — 8 Nov 2026
+
+- User requested higher-quality pictures up to 4K and explicitly selected AI enhancement after being advised that fine details may be reconstructed.
+- 22 lower-resolution project images received built-in ImageGen restoration; 7 existing 4096px originals use native-source exports. Final masters are 3840px on the longest edge, preserving original proportions. Export resolution does not represent native captured detail.
+- AI-enhanced photos are labeled in the viewer. Use original records, not reconstructed labels, faces, equipment details, or wiring in enhanced photos, as evidence for technical or historical claims.
+- Original assets are preserved. Output dimensions and methods are recorded in `content/photo-quality.json`; prompts in `content/photo-enhancement-prompts.md`.

@@ -1,0 +1,62 @@
+/* React Bits adaptations; see LICENSE.md. Brand tokens remain owned by FRO Solar. */
+.rb-pill-nav { padding: 4px; border: 1px solid #ffffff26; border-radius: var(--radius); background: #082f2d80; }
+.rb-pill-nav ul { display: flex; align-items: center; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.desktop-menu .rb-pill-nav__item { position: relative; isolation: isolate; display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 14px; overflow: hidden; border-radius: 8px; color: #d4e2de; font-size: 13px; font-weight: 650; line-height: 1.2; }
+.desktop-menu .rb-pill-nav__item::after { display: none; }
+.rb-pill-nav__active, .rb-pill-nav__fill { position: absolute; z-index: -1; inset: 0; border-radius: inherit; background: var(--green-300); pointer-events: none; }
+.rb-pill-nav__fill { transform: translateY(105%); transition: transform 380ms cubic-bezier(.16, 1, .3, 1); }
+.rb-pill-nav__face, .rb-pill-nav__face-alt { display: block; transition: transform 380ms cubic-bezier(.16, 1, .3, 1), opacity 240ms ease; }
+.rb-pill-nav__face-alt { position: absolute; color: var(--teal-950); opacity: 0; transform: translateY(160%); }
+.desktop-menu .rb-pill-nav__item[aria-current] { color: var(--teal-950); }
+.rb-pill-nav__item:focus-visible .rb-pill-nav__fill { transform: translateY(0); }
+.rb-pill-nav__item:focus-visible .rb-pill-nav__face { transform: translateY(-160%); opacity: 0; }
+.rb-pill-nav__item:focus-visible .rb-pill-nav__face-alt { transform: translateY(0); opacity: 1; }
+.mobile-menu a[aria-current] { color: var(--green-300); }
+
+.rb-spotlight { position: relative; isolation: isolate; }
+.rb-spotlight::before { position: absolute; z-index: -1; inset: 0; background: radial-gradient(340px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), var(--spotlight-color), transparent 75%); content: ''; opacity: 0; transition: opacity 220ms ease; pointer-events: none; }
+.rb-spotlight:focus-within::before { opacity: 1; }
+.system-card__body { position: relative; }
+.system-card__action { display: flex; justify-content: space-between; align-items: center; gap: 10px; width: 100%; min-height: 48px; margin-top: 20px; padding: 12px 14px; color: var(--teal-900); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; font-size: 14px; font-weight: 700; transition: background-color 180ms ease, border-color 180ms ease; }
+.system-card__action:hover, .system-card__action[data-selected] { background: var(--green-300); border-color: var(--green-300); }
+.system-card__action svg { transition: transform 180ms ease; }
+.system-card__action:hover svg { transform: translateX(3px); }
+.rb-count-up { display: inline-block; }
+.rb-count-up__digits { display: inline-block; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Service photographs, choices and enquiry controls share the page's layout language. */
+.systems .systems-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.systems .system-card { display: flex; min-width: 0; flex-direction: column; min-height: 0; }
+.systems .system-card__media { flex-shrink: 0; width: 100%; min-height: 0; aspect-ratio: 4 / 3; }
+.systems .system-card__media::after { display: none; }
+.systems .system-card__media img { transition: none; }
+.systems .system-card:hover .system-card__media img { transform: none; }
+.systems .system-card__body { flex: 1; padding: 24px 20px 20px; }
+.systems .system-card__title { align-items: flex-start; gap: 10px; }
+.systems .system-card__title svg { flex-shrink: 0; margin-top: 3px; }
+.systems .system-card__title h3 { min-height: 2.6em; }
+.systems .system-card__body > p { margin-top: 14px; }
+.enquiry-selection:empty { display: none; }
+.enquiry-selection__content { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 28px; padding: 14px 16px; color: var(--white); border: 1px solid #ffffff4d; border-radius: var(--radius); }
+.enquiry-selection__content > span { min-width: 0; color: #c2d7d2; font-size: 13px; }
+.enquiry-selection__content strong { display: block; margin-top: 3px; color: var(--green-300); font-size: 17px; font-weight: 650; }
+.enquiry-selection__content button { display: inline-grid; flex: 0 0 44px; place-items: center; width: 44px; height: 44px; color: var(--white); background: transparent; border: 1px solid #ffffff4d; border-radius: 6px; cursor: pointer; }
+.enquiry-selection__content button:hover { background: #ffffff14; }
+@media (max-width: 1100px) { .systems .systems-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .systems .systems-grid { grid-template-columns: 1fr; gap: 24px; }
+  .systems .system-card__media { aspect-ratio: 16 / 10; }
+  .systems .system-card__title h3 { min-height: 0; }
+  .systems .system-card__body { min-height: 0; }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rb-pill-nav__item:hover .rb-pill-nav__fill { transform: translateY(0); }
+  .rb-pill-nav__item:hover .rb-pill-nav__face { transform: translateY(-160%); opacity: 0; }
+  .rb-pill-nav__item:hover .rb-pill-nav__face-alt { transform: translateY(0); opacity: 1; }
+  .rb-spotlight:hover::before { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rb-pill-nav__fill, .rb-pill-nav__face, .rb-pill-nav__face-alt, .system-card__action svg { transition: none; }
+  .rb-spotlight::before { display: none; }
+}
